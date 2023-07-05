@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+      <meta charset="utf-8">
+      <title>Create an account</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+<link href="../css/register_page.css" rel="stylesheet">
+
+<link href="../css/select2.min.css" rel="stylesheet">
+
+
+<!--  --> 
+  </head>
+
+  <body>
+
+<div class="content" > 
+
+<div th:unless="${message.isEmpty()}">
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Teacher Registration Successful</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+ <p th:text=${message}></p>
+      </div>
+      <div class="modal-footer">
+      <!--   <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button> -->
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ </div> 
+  
+  
+  
+    <div class="container">
+ <div class="row">
+                <div class="col-md-6">
+                    <img src="../images/undraw_remotely_2j6y.svg"  class="img-fluid customimage">
+                </div>
+                <div class="col-md-6 contents">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="mb-4">
+                                <h3>Sign Up as Teacher</h3>
+                                <p class="mb-4">Welcome all of our teachers.</p>
+                            </div>
+
+      <form th:object="${teacherForm}" th:action="@{registration}" method="post"  >
+                                <div class="form-group first mb-4">
+                                    <label for="name" >Name</label>
+                                      <input  class="form-control" id="teacherName" type="text" th:field="*{teacherName}"  >
+                                </div>
+                                
+                                <div class="form-group last mb-4">
+                                    <label for="password">Email</label>
+                                     <input class="form-control" id="teacherEmail" type="email" th:field="*{teacherEmail}"   >
+                                </div>
+                                
+                                <div class="form-group last mb-4">
+                                    <label for="password">Password</label>
+                                      <input class="form-control" id="teacherPassword" type="password" th:field="*{teacherPassword}"  >
+                                </div>
+                                
+                                
+                                <div class="form-group last mb-4">
+                                    <label for="password">Confirm Password</label>
+                                      <input class="form-control"  id="passwordConfirm" type="password" th:field="*{passwordConfirm}"  >
+                                </div>
+                                <div class="form-group last mb-4">
+                                 <select   id="teacherSchoolSelect" >
+                                 
+                                 <option value="" th:disabled="disabled" selected="true"
+                      >Select School</option>
+		 	        <option th:each="school : ${schoolList}"
+			                th:value="${{school}}" th:text="${school.schoolName}"></option>
+			
+			                    </select></div>
+			            
+			                    
+			                     <div class="form-group last mb-4">
+                                    <label for="password">Subject</label>
+                                       <input class="form-control"  id="teacherSubject" type="text" th:field="*{teacherSubject}"  >
+                                </div>
+			                    <div class="form-group last mb-4">
+                                    <label for="password">Mobile number</label>
+                                         <input class="form-control"  id="teacherPhone" type="text" th:field="*{teacherPhone}"  >
+                                </div>
+                                
+                          
+                                <input type="submit" value="Sign Up" class="btn btn-block btn-primary">
+                           <span class="d-block text-left my-4 text-muted"></span>
+                                <!-- <div class="social-login">
+                                
+                               <a th:href="@{/teacher/registration}" >
+                                        <span ></span>
+                                    </a>
+                                    <a href="#" class="facebook">
+                                        <span class="icon-facebook mr-3"></span>
+                                    </a>
+                                    <a href="#" class="twitter">
+                                        <span class="icon-twitter mr-3"></span>
+                                    </a>
+                                    <a href="#" class="google">
+                                        <span class="icon-google mr-3"></span>
+                                    </a>
+                                </div> -->
+                            </form>
+</div>
+</div>
+</div>
+</div>
+
+
+    </div>
+    
+ 
+    
+    
+ 
+  
+  
+  
+   </div>
+<!-- jQuery --> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+
+
+<script src="../js/select2.min.js"></script>
+   <script src="../js/bootstrap.min.js"></script> 
+<script>
+        var mod_pagespeed_DPOuBfjpPE = "$(function() {\n	'use strict';\n	\n  $('.form-control').on('input', function() {\n	  var $field = $(this).closest('.form-group');\n	  if (this.value) {\n	    $field.addClass('field--not-empty');\n	  } else {\n	    $field.removeClass('field--not-empty');\n	  }\n	});\n\n});";
+    </script>
+    <script>
+        eval(mod_pagespeed_DPOuBfjpPE);
+    </script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	 
+	  // Initialize select2
+	  $("#teacherSchoolSelect").select2();
+
+	  // Read selected option
+	  $('#but_read').click(function(){
+	    var username = $('#teacherSchoolSelect option:selected').text();
+	    var userid = $('#teacherSchoolSelect').val();
+
+	    //$('#result').html("id : " + userid + ", name : " + username);
+
+	  });
+	});
+
+</script>
+
+<script th:inline="javascript">
+    var msg = /*[[${message}]]*/ '';
+    
+     if(msg!=null){
+    	 $(document).ready(function(){
+    			$("#exampleModal").modal('show');
+    			}); 
+     }
+	
+
+
+</script>
+
+  </body>
+</html>

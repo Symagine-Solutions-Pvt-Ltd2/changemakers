@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Online School</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/css/adminlte.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper2 wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light justify-content-between align-items-center">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+           
+            </ul>
+
+            <h1 class="title text-center" th:text="#{textTitleHome}+${studentModel.studentFirstName}"></h1>
+
+            <div class="complete">
+                <p class="com" th:text="#{textAccomplishment}">Statement of <br> Accomplishment<img src="/images/trophy.png" alt="trophy" width="35" height="35"></p>
+                <button class="btn btn-outline-light" th:text="#{textDownloadCertificate}">Download Certificate</button>
+            </div>
+
+            <!-- Right navbar links -->
+
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex border-0">
+                  
+                </div>
+
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                      <li class="nav-item"><a th:href="@{/student/home}"
+							class="nav-link"> <img class="pr-4"
+								src="/images/booksicon.png" width="55px"></img>
+								<p style="font-weight: bolder" th:text="#{textTitleHome}">
+                                    <i class="right fas fa-angle-left"></i>
+								</p>
+						</a></li>
+                       <!-- <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <img class="pr-4" src="/images/booksicon.png" width="55px"></img>
+                                <p style="font-weight:bolder"  th:text="#{textModule}">
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview" th:each="module: ${studentModuleList}">
+                                <li class="nav-item">
+                                    <a th:href="@{/student/program/{prog_id}/content/{module_id}(module_id=${module.moduleId},prog_id=${programModel.progId})}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p th:text="'Module-'+${module.moduleId}"></p>
+                                    </a>
+                                </li>
+                                
+                               
+                            </ul>
+                        </li>-->
+ <li class="nav-item"><a th:href="@{/student/logout}" class="nav-link">
+                                <img class="pr-4" src="/images/booksicon.png" width="55px"></img>
+                                <p style="font-weight:bolder" th:text="#{textLogout}">
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                                </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title" th:text="#{textModule}"></h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row ml-1 mr-2">
+                                        <div class="col-12 col-md-6 col-xl-4" th:each="module,itrstat : ${studentModuleList}">
+                                            <div class="card margin20" style="width:auto">   <!-- <a th:href="@{/student/content/{program_id}(program_id=${program.moduleId})}"> -->
+                                               <a th:href="@{/student/program/{prog_id}/content/{module_id}(module_id=${module.moduleId},prog_id=${programModel.progId})}">
+                                                    <img class="card-img-top" style="height:120px;" th:src="@{${module.image}}" alt="Card image">
+                                                </a>
+                                                <div class="card-body">
+                                                    
+                                                    <h4 class="card-title" style="line-height: 1.5em;height: 3em;overflow:hidden;" th:text="''+${module.description}"></h4><br>
+                                                 
+                                                   <div th:if="${module.progress==100}">
+                                                    <a th:href="@{${module.deepDive}}" target="_blank"  >
+                                                        <p class="card-text"><img src="/images/download.png" width="35px" class="mr-3 mb-1"></img>Deep dive</p>
+                                                    </a>
+                                                   </div>
+                                                   
+                                                    <div th:if="${module.progress<100}">
+                                                    <a >
+                                                        <p class="card-text"><img src="/images/download.png" width="35px" class="mr-3 mb-1"></img>Deep dive</p>
+                                                    </a>
+                                                   </div>
+                                                </div>
+                                                <div class="overlayz" th:if="${itrstat.index>0&&module.isOngoing==0&&module.progress<100}">
+                                                <img src="/images/access.png" width="200px" style="margin-top: 90px;" alt="Denied">
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                          
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+
+            </div>
+            <strong>Copyright &copy; 2021 <a href="#">Online School</a>.</strong> All rights reserved.
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery -->
+    <script src="/js/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/js/adminlte.min.js"></script>
+    <!-- Ion Slider -->
+    <script src="/js/ion.rangeSlider.min.js"></script>
+    <!-- Bootstrap slider -->
+    <script src="/js/bootstrap-slider.min.js"></script>
+    <!-- AdminLTE for demo purposes
+        <script src="js/demo.js"></script> -->
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            /* BOOTSTRAP SLIDER */
+            $('.slider').bootstrapSlider()
+
+            /* ION SLIDER */
+            $('#range_1').ionRangeSlider({
+                min: 0,
+                max: 5000,
+                from: 1000,
+                to: 4000,
+                type: 'double',
+                step: 1,
+                prefix: '$',
+                prettify: false,
+                hasGrid: true
+            })
+            $('#range_2').ionRangeSlider()
+
+            $('#range_5').ionRangeSlider({
+                min: 0,
+                max: 10,
+                type: 'single',
+                step: 0.1,
+                postfix: ' mm',
+                prettify: false,
+                hasGrid: true
+            })
+            $('#range_6').ionRangeSlider({
+                min: -50,
+                max: 50,
+                from: 0,
+                type: 'single',
+                step: 1,
+                postfix: '°',
+                prettify: false,
+                hasGrid: true
+            })
+
+            $('#range_4').ionRangeSlider({
+                type: 'single',
+                step: 100,
+                postfix: ' light years',
+                from: 55000,
+                hideMinMax: true,
+                hideFromTo: false
+            })
+            $('#range_3').ionRangeSlider({
+                type: 'double',
+                postfix: ' miles',
+                step: 10000,
+                from: 25000000,
+                to: 35000000,
+                onChange: function(obj) {
+                    var t = ''
+                    for (var prop in obj) {
+                        t += prop + ': ' + obj[prop] + '\r\n'
+                    }
+                    $('#result').html(t)
+                },
+                onLoad: function(obj) {
+                    //
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

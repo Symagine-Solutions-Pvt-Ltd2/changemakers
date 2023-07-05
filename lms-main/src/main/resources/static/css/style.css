@@ -1,0 +1,353 @@
+.nav-sidebar>.nav-item.menu-open>.nav-link,
+[class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link,
+[class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link {
+    background-color: rgba(255, 255, 255, .1);
+    color: #1f2d3d !important;
+    font-size: 20px;
+}
+.nav-sidebar>.nav-item.menu-open>.nav-link,
+[class*=sidebar-dark-] .nav-sidebar>.nav-item:hover>.nav-link,
+[class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link:focus {
+    background-color: rgba(255, 255, 255, .1);
+    color: #1f2d3d !important;
+    font-size: 20px;
+}
+.overlayz {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.3;
+    display:table-cell; 
+    vertical-align:middle; 
+    text-align:center;
+    /* visibility: none; */
+    /* transition: .5s ease; */
+    background-color: #c2c2c2;
+}
+
+.overlaytext {
+    position: absolute;
+    /* top: 146px; */
+    bottom: 0;
+    /* left: 71px; */
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+    /* visibility: none; */
+    /* transition: .5s ease; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.button1 {
+    background-color: blue;
+    color: white;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.com {
+    font-weight: bold;
+    font-size: 16px;
+    color: #1f2d3d;
+    line-height: 16px;
+    margin-bottom: 5px;
+    display: inline-flex;
+}
+
+.btn-danger2:hover {
+    cursor: not-allowed !important;
+}
+
+h1.title {
+    padding-left: 13%;
+}
+
+.complete {
+    width: auto;
+    flex: 0.2;
+}
+
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link {
+    color: #fefeff;
+}
+
+.btn-outline-light {
+    color: #1f2d3d;
+    border-color: #9c27b0;
+    border: 2px solid #9c27b0;
+    font-weight: bold;
+    background-color: white;
+    line-height: 14px;
+    font-size: 14px;
+}
+
+body:not(.layout-fixed) .main-sidebar {
+    top: 90px;
+}
+
+
+/* .card:hover .overlayz {
+    opacity: 0.6;
+}
+
+.card:hover .overlaytext {
+    opacity: 1;
+} */
+
+.card-primary:not(.card-outline)>.card-header {
+    background-color: #ffbf00;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+.container {
+    background-color: #ffffff;
+    color: #1f2d3d;
+    border-radius: 10px;
+    padding: 41px;
+    font-family: 'Montserrat', sans-serif;
+    max-width: 762px;
+}
+
+.container>p {
+    font-size: 32px
+}
+
+
+
+
+
+.wrapper2 {
+    background: #f8f8f3;
+}
+
+.imageheight {
+    max-height: 186px;
+}
+
+
+
+
+
+
+
+.card-title2 {
+    font-size: 19px;
+    margin-bottom: 18px;
+    opacity: 0.9;
+    margin-right: 50px;
+}
+
+
+
+.margin20 {
+    margin: 45px;
+    border: .5px solid #1f2d3d;
+}
+
+
+
+video::-webkit-media-controls-play-button {
+    display: inline;
+    opacity: 1 !important;
+}
+
+
+.centerol {
+    text-align: center;
+    list-style-position: inside;
+    font-size: 18px;
+}
+.cls1 {
+    margin-right: 0px !important;
+    background-color: #99c5ae;
+    font-weight: 900;
+}
+.score {
+    font-weight: 800;
+    color: #00ac4d;
+}
+.card-title {
+    float: left;
+    margin: 0;
+    color: #1f2d3d !important;
+    font-size: 27px;
+    margin-right: 50px;
+}
+.card-text {
+    clear: both;
+    color: #8d8383;
+    font-size: 30px;
+}
+.card {
+    position: relative;
+    transition: all .5s ease-in;
+}
+.videocls {
+    margin-top: 10px;
+    margin-left: 178px;
+    margin-right: 200px;
+}
+.question {
+    width: 75%
+}
+.options {
+    position: relative;
+    padding-left: 40px
+}
+#options label {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 14px;
+    cursor: pointer
+}
+
+.options input {
+    opacity: 0
+}
+
+.checkmark {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #99c5ae;
+    border: 1px solid #1f2d3d;
+    border-radius: 50%;
+}
+
+.options input:checked~.checkmark:after {
+    display: block
+}
+
+.options .checkmark:after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    display: block;
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 300ms ease-in-out 0s
+}
+
+.options input[type="radio"]:checked~.checkmark {
+    background: #21bf73;
+    transition: 300ms ease-in-out 0s
+}
+
+.options input[type="radio"]:checked~.checkmark:after {
+    transform: translate(-50%, -50%) scale(1)
+}
+
+@media(max-width:1180px) {
+    .complete {
+        flex: 0.3;
+    }
+}
+
+@media(max-width:1024px) {
+    .card-title2 {
+        font-size: 17px;
+        margin-bottom: 18px;
+        opacity: 0.9;
+        margin-right: 50px;
+    }
+}
+
+@media(max-width:768px) {
+    .complete {
+        flex: 0.4;
+    }
+}
+
+@media(max-width:767px) {
+    .complete {
+        flex: 1;
+    }
+    h1.title {
+    padding-left: 0;
+    font-size: 20px;
+    margin: 0;
+}
+.com{
+    font-size: 15px;
+}
+.btn-outline-light{
+    padding: 0.375rem 0.45rem;
+}
+.btn-group-lg>.btn, .btn-lg{
+    font-size: 15px;
+}
+}
+
+@media only screen and (max-width: 560px) {
+    .question {
+        width: 100%;
+        word-spacing: 2px
+    }
+    .imageheight {
+        max-height: 175px;
+    }
+    .margin20 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-right: 0px;
+        margin-left: 0px;
+        border: .5px solid #1f2d3d;
+    }
+    .videocls {
+        margin-top: 21px;
+        margin-left: 5px;
+        margin-right: 1px;
+        margin-bottom: 0px;
+    }
+    .card-title {
+        float: left;
+        margin: 0;
+        color: #000 !important;
+        font-size: 26px;
+        margin-right: 50px;
+    }
+    .card-text {
+        clear: both;
+        color: #8d8383;
+        font-size: 25px;
+    }
+    .card-title2 {
+        font-size: 20px;
+        margin-bottom: 18px;
+        opacity: 0.9;
+        margin-right: 50px;
+    }
+}
+
+@media only screen and (max-width: 340px) {
+h1.title{
+    font-size: 17px;
+}
+.com {
+    font-size: 13px;
+}
+.btn-outline-light{
+    font-size: 12px;
+}
+}

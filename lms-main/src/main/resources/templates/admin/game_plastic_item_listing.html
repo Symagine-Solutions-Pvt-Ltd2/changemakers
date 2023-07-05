@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<body>
+<p class="card-title mb-0">Plastic Items</p>
+<div class="table-responsive" >
+    <table  class="table table-striped">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th th:text="#{textName}"></th>
+            <th th:text="#{textImage}"></th>
+            <th th:if="${gameId==1 or gameId==4}" > Category</th>
+            <th th:if="${gameId==1 or gameId==4}"> Short Name </th>
+            <th th:if="${gameId==2}"> Weight per unit </th>
+            <th > Points </th>
+            <th > Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="plasticItem,itrStat : ${dragDropPlasticItemList}">
+            <td th:text="${itrStat.index+1}"></td>
+            <td class="font-weight-bold" th:text="${plasticItem.name}"></td>
+            <td  style="color:blue;text-decoration: underline; " >
+                <a th:href="${plasticItem.image}" th:target="_blank"  style="color:black; text-decoration: underline;" th:text="${plasticItem.image}"></a>
+            </td>
+            <td th:if="${gameId==1 or gameId==4}" th:text="${plasticItem.plasticCategory.category}" ></td>
+            <td th:if="${gameId==1 or gameId==4}" th:text="${plasticItem.plasticCategory.shortName}" ></td>
+            <td th:if="${gameId==2}" th:text="${plasticItem.plasticWeightPerUnit}" ></td>
+            <td th:text="${plasticItem.point}" ></td>
+            <td>
+                <button th:text="#{textEdit}" type="button" class="btn btn-outline-secondary btn-icon-text"   th:onclick="goToEditDragDropItems([[${itrStat.index}]],[[${gameId}]])" >
+
+                    <i class="ti-file btn-icon-append"></i>
+                </button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+</body>
+
+
+</html> 

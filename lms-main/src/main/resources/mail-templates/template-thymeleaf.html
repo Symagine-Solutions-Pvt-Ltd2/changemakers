@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:remove="all">Login Credentails</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+    <p th:text="#{title(${recipientName})}">
+    </p>
+   
+    <p th:text="#{welcomemessage(${portal})}">
+    </p>
+    <p th:text="#{instruction(${portal})}">
+  
+    </p>
+    <ul >
+      <li th:text="#{url(${loginuri})}"></li>
+      <li th:text="#{email(${email})}"></li>
+      <li th:text="#{password(${password})}"></li>
+    </ul>
+    <p th:text="#{regards}">
+     
+
+    </p>
+    
+    <p th:text="#{team}">
+      
+    </p>
+  </body>
+</html>

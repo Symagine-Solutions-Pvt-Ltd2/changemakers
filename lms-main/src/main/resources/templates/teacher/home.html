@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Online School</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../css/adminlte.min.css">
+   <link rel="stylesheet" href="../css/login_page.css">
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper2 wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <!-- <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+      </li> -->
+            </ul>
+
+            <h1 class="title text-center" th:text="'Welcome '+${teacherModel.teacherName}"></h1>
+
+            <!-- Right navbar links -->
+
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex border-0">
+                    <!-- <div class="image">
+          <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div> -->
+                    <!--  <div class="info">
+          <a href="#" class="d-block">Alexander Pierce</a>
+        </div> -->
+                </div>
+
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+               <br /> with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <img class="pr-4" src="../images/booksicon.png" width="55px"></img>
+                                <p style="font-weight:bolder">
+                                    Dashboard
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview" >
+                                <li class="nav-item">
+                                    <a href="./content.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Check Students Report</p>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        
+                        <li class="nav-item">
+                          <a th:href="@{/teacher/logout}" class="nav-link">
+                                <img class="pr-4" src="../images/booksicon.png" width="55px"></img>
+                                <p style="font-weight:bolder">
+                                     Logout
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                        </li>
+
+                    </ul>
+                    
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row mt-2 ml-1 mr-2" >
+                        <div class="col-12 col-md-6 col-xl-4">
+                          <!--   <div class="card margin20" style="width:auto">
+                                <a href="./content.html">
+                                    <img class="card-img-top imageheight" src="../images/wastemanagementimage1.jpg" alt="Card image">
+                                </a>
+                                <div >
+                                    <h4 ></h4><br>
+                                    <h4 ></h4><br>
+                                    <a href="#">
+                                        <p ><img  width="35px"></img></p>
+                                    </a>
+                                </div>
+                            </div> -->
+                        </div>
+                        
+                    </div>
+                    </div>
+                    <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
+
+            <footer class="main-footer">
+                <div class="float-right d-none d-sm-block">
+
+                </div>
+                <strong>Copyright &copy; 2021 <a href="#">Online School</a>.</strong> All rights reserved.
+            </footer>
+
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+            </aside>
+            <!-- /.control-sidebar -->
+        </div>
+        <!-- ./wrapper -->
+
+        <!-- jQuery -->
+        <script src="../js/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="../js/adminlte.min.js"></script>
+        <!-- Ion Slider -->
+        <script src="../js/ion.rangeSlider.min.js"></script>
+        <!-- Bootstrap slider -->
+        <script src="../js/bootstrap-slider.min.js"></script>
+        <!-- AdminLTE for demo purposes
+        <script src="../js/demo.js"></script> -->
+        <!-- Page specific script -->
+        <script>
+            $(function() {
+                /* BOOTSTRAP SLIDER */
+                $('.slider').bootstrapSlider()
+
+                /* ION SLIDER */
+                $('#range_1').ionRangeSlider({
+                    min: 0,
+                    max: 5000,
+                    from: 1000,
+                    to: 4000,
+                    type: 'double',
+                    step: 1,
+                    prefix: '$',
+                    prettify: false,
+                    hasGrid: true
+                })
+                $('#range_2').ionRangeSlider()
+
+                $('#range_5').ionRangeSlider({
+                    min: 0,
+                    max: 10,
+                    type: 'single',
+                    step: 0.1,
+                    postfix: ' mm',
+                    prettify: false,
+                    hasGrid: true
+                })
+                $('#range_6').ionRangeSlider({
+                    min: -50,
+                    max: 50,
+                    from: 0,
+                    type: 'single',
+                    step: 1,
+                    postfix: '°',
+                    prettify: false,
+                    hasGrid: true
+                })
+
+                $('#range_4').ionRangeSlider({
+                    type: 'single',
+                    step: 100,
+                    postfix: ' light years',
+                    from: 55000,
+                    hideMinMax: true,
+                    hideFromTo: false
+                })
+                $('#range_3').ionRangeSlider({
+                    type: 'double',
+                    postfix: ' miles',
+                    step: 10000,
+                    from: 25000000,
+                    to: 35000000,
+                    onChange: function(obj) {
+                        var t = ''
+                        for (var prop in obj) {
+                            t += prop + ': ' + obj[prop] + '\r\n'
+                        }
+                        $('#result').html(t)
+                    },
+                    onLoad: function(obj) {
+                        //
+                    }
+                })
+            })
+        </script>
+</body>
+
+</html>

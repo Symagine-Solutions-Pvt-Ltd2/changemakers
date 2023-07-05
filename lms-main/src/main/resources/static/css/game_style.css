@@ -1,0 +1,79 @@
+.recycleitem {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+#dropBox1,
+#dropBox2,
+#dropBox3,
+#dropBox4,#dropBox5,#dropBox6,#dropBox7 {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+}
+
+.dropBox{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100px;
+  margin-left: 50%;
+  margin-right: 50%;
+  margin-top: 8px;
+  border: 1px solid #aaaaaa;
+  padding: 1rem;
+}
+
+.imgstyle{
+  height: 150px;
+  width: 150px;
+}
+
+.imgstyle2{
+  height: 60px;
+  width: 60px;
+}
+
+.image_game_quiz{
+  opacity: 0.8;
+  width: 200px;
+  height: 160px;
+  background-position: center center;
+  background-color: #f3f3f3;
+  display: inline-block;
+  margin: 10px;
+
+
+}
+.image_game_drop{
+  opacity: 0.8;
+  width: 150px;
+  height: 100px;
+  background-position: center center;
+  background-color: #f3f3f3;
+  display: inline-block;
+  margin: 10px;
+
+
+}
+
+image_game_quiz:hover {
+   opacity: 1;
+ }
+
+.radio_img_game_quiz > input {
+  display:none;
+}
+.radio_img_game_quiz > .image_game_quiz{
+  cursor:pointer;
+  border: 1px solid grey;
+
+}
+.radio_img_game_quiz > input:checked + .image_game_quiz{
+  border:2px solid orange;
+}
+

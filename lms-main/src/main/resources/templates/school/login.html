@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+	<title>Login V14</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="../admin_assets/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../admin_assets/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../admin_assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../admin_assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../admin_assets/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="../admin_assets/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../admin_assets/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../admin_assets/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="../admin_assets/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../admin_assets/css/util.css">
+	<link rel="stylesheet" type="text/css" href="../admin_assets/css/main.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" href="../vendors/feather/feather.css">
+	<link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
+	<link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
+	<!-- endinject -->
+	<!-- Plugin css for this page -->
+	<link rel="stylesheet" href="../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+	<link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
+	<link rel="stylesheet" type="text/css" href="../admin_assets/js/select.dataTables.min.css">
+	<!-- End plugin css for this page -->
+	<!-- inject:css -->
+	<link rel="stylesheet" href="../admin_assets/css/vertical-layout-light/style.css">
+	<!-- endinject -->
+	<link rel="shortcut icon" href="../admin_assets/images/favicon.png" />
+
+	<!-- Plugin css for this page -->
+
+	<link rel="stylesheet" href="../vendors/select2/select2.min.css">
+	<link rel="stylesheet" href="../vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+</head>
+<body>
+
+<div th:unless="${message.isEmpty()}">
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Message</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p th:text=${message}></p>
+				</div>
+				<div class="modal-footer">
+					<!--   <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button> -->
+					<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+				<form class="login100-form validate-form flex-sb flex-w" th:object="${schoolLoginForm}" th:action="@{/school/login}" method="post">
+					<span class="login100-form-title p-b-32">
+						School Login
+					</span>
+
+					<span class="txt1 p-b-11">
+						Email
+					</span>
+					<div class="wrap-input100 validate-input m-b-36" data-validate = "Email is required">
+						<input class="input100" type="text"  th:field="*{contactEmail}" >
+						<span class="focus-input100"></span>
+					</div>
+					
+					<span class="txt1 p-b-11">
+						Password
+					</span>
+					<div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
+						<span class="btn-show-pass">
+							<i class="fa fa-eye"></i>
+						</span>
+						<input class="input100" type="password" name="pass" th:field="*{password}" >
+						<span class="focus-input100"></span>
+					</div>
+					
+					<div class="flex-sb-m w-full p-b-48">
+						<div class="contact100-form-checkbox">
+							
+							<label class="" for="ckb1">
+								
+							</label>
+						</div>
+
+						<div>
+							<a href="#" class="txt3">
+						
+							</a>
+						</div>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Login
+						</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	<script src="../admin_assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../admin_assetsvendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../admin_assetsvendor/bootstrap/js/popper.js"></script>
+	<script src="../admin_assetsvendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../admin_assetsvendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../admin_assetsvendor/daterangepicker/moment.min.js"></script>
+	<script src="../admin_assetsvendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="../admin_assets/vendor/countdowntime/countdowntime.js"></script>
+
+<!-- plugins:js -->
+<script src="../admin_assets/vendors/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script src="../admin_assets/vendors/chart.js/Chart.min.js"></script>
+<script src="../admin_assets/vendors/datatables.net/jquery.dataTables.js"></script>
+<script src="../admin_assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+<script src="../admin_assets/js/dataTables.select.min.js"></script>
+
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="../admin_assets/js/off-canvas.js"></script>
+<script src="../admin_assets/js/hoverable-collapse.js"></script>
+<script src="../admin_assets/js/template.js"></script>
+<script src="../admin_assets/js/settings.js"></script>
+<script src="../admin_assets/js/todolist.js"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="../admin_assets/js/dashboard.js"></script>
+<script src="../admin_assets/js/Chart.roundedBarCharts.js"></script>
+<!-- End custom js for this page-->
+
+<script src="../admin_assets/js/file-upload.js"></script>
+<script src="../vendors/select2/select2.min.js"></script>
+<script src="../admin_assets/js/select2.js"></script>
+
+<script th:inline="javascript">
+
+	var msg = /*[[${message}]]*/ '';
+
+	if(msg!=null){
+		$(document).ready(function(){
+			$("#exampleModal").modal('show');
+		});
+	}
+	function openImageInNewTab(url) {
+		window.open(url, "_blank");
+	}
+
+</script>
+</body>
+</html>

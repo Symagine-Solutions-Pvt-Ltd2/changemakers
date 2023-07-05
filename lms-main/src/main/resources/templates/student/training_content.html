@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> &nbsp </title>
+    <link rel="stylesheet" href="/student_assets/vendor/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/student_assets/vendor/css/aos.css">
+    <link rel="stylesheet" href="/student_assets/vendor/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/student_assets/vendor/css/animate.min.css">
+    <link rel="stylesheet" href="/student_assets/vendor/css/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/student_assets/vendor/css/toastify.css">
+    <link rel="stylesheet" href="/student_assets/static/css/style.css">
+    <link rel="stylesheet" href="/student_assets/static/css/loading.css">
+</head>
+<body class="body_class bg_set_1"  id="idbody">
+
+      <nav class="navbar fixed-top navbar-expand-lg navmain">
+          <div class="container-fluid">
+              <a class="navbar-brand" th:href="@{/student/home}">
+                  <img src="/student_assets/static/img/logo/navlogo.png" alt="" width="250" height="50" id="nav-logo">
+              </a>
+              <button type="button" class="navbar-toggler text-light" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                  </svg>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarCollapse">
+
+                  <ul class="navbar-nav ms-auto justify-content-end">
+                      <!-- <li class="nav-item">
+                        <a class="nav-link text-light" href="#">
+                          Courses
+                        </a>
+                      </li> -->
+
+                      <li class="dropright">
+                          <a class="nav-link dropdown-toggle-split text-light" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                              </svg>
+                          </a>
+                          <ul class="dropdown-menu dropdown-menu-end">
+                              <li><a class="dropdown-item text-left" style="font-size:12px;" th:href="@{/student/logout}" >Log Out</a></li>
+                              <!-- <li><a class="dropdown-item text-left" style="font-size:12px;" href="#">Download Certificate</a></li> -->
+
+                          </ul>
+                      </li>
+
+
+                  </ul>
+
+              </div>
+          </div>
+      </nav>
+
+      <div class="container" style="min-height:1000px; margin-top:10%;">
+
+
+      <div class="row" id="divContent">
+        <div class="offset-1 col-md-10">
+            
+               <div class="quiz-div">
+                   <div class="quiz-div-outer">
+                       <div class="row module-details">
+                           <div class="col-md-12">
+                               <strong th:text="${moduleDetail.moduleName}">About Plastic</strong>
+                               <br/>
+                               <small th:text="${moduleDetail.description}">An introduction into the World of Plastic</small>
+                           </div>
+
+                       </div>
+                        <div class="row">
+
+                                <div class="col-md-12 quiz-div-inner" id="video1">
+                                    <div class="sada-container" >
+                                        <div class="q-set">
+                                            <video id="vp1" style="width: 100%;height:450px;" onended="endVideo1()" oncontextmenu="return false;" controls disablePictureInPicture controlslist="nodownload noremoteplayback noplaybackrate foobar">
+                                                <source th:src="@{${taskData.videoUrl1}}" type="video/mp4" />
+                                            </video>
+                                        </div>
+                                        <div class="controller" style="padding:25px;">
+                                            <a th:href="@{/student/module/{prog_id}(prog_id=${programModel.progId})}">
+                                                <button class="btn btn-block btn-info" style="font-weight: bold;" th:text="#{textBack}">Back</button>
+                                            </a>
+                                            <button  id="nextvideo1" class="btn btn-block btn-warning" style="display: none;margin:0 auto;float:right;font-weight: bold;" th:text="#{textNext}"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 quiz-div-inner" id="game_score_show" style="display: none">
+
+                                    <div class="sada-container" style="padding:25px;">
+                                        <div class="container" id="game_score" >
+
+                                        </div>
+
+                                        <div class="controller text-center" style="padding:25px;">
+
+
+                                            <button id="gameback" class="btn btn-block btn-info" style="font-weight: bold;float: left" th:text="#{textBack}"></button>
+                                            <button  id="gamenext" class="btn btn-block btn-warning" style="margin:0 auto;float:right;font-weight: bold;" th:text="#{textNext}"></button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 quiz-div-inner" id="game" th:unless="${taskData.game==null}" style="display: none">
+                                    <div class="sada-container" style="padding:25px;">
+                                        <div class="col-md-12">
+                                            <div class="col-md-12 text-center header_a" style="font-size: x-large;background-color: #99C5AE;height: auto">
+                                                <span id="spanGameTextHeader" th:text="${taskData.game.gameType}"></span>
+                                            </div>
+                                            <div class="col-12 col-md-12 col-xl-12" th:if="${taskData.game.gameId== 1 or taskData.game.gameId== 4 }">
+
+                                                <div id="divDragDrop7BinCorrectAns" class="row" style="display: none">
+                                                    <img src="/student_assets/static/img/drag_drop_7bin_correctans.jpg">
+                                                </div>
+
+                                                <div id="divDragDrop4BinCorrectAns" class="row" style="display: none">
+                                                    <img src="/student_assets/static/img/drag_drop_4bin_correctans.jpg">
+                                                </div>
+
+                                                <div class="col-12 col-md-12 col-xl-12" id="divGameDragDrop">
+                                                    <div th:if="${taskData.game.gameId== 1}" style="text-align: center" id="dragDropHeader">
+                                                        <h5  ><b style="color:#FFCC33;width:100%" th:text="#{dragDropMsg}"></b></h5>
+                                                        <h5 ><b style="color:#FFCC33;width:100%" th:text="#{dragDropMsgSubMsg}"></b></h5>
+                                                    </div>
+                                                    <div id="segregationHeader" th:if="${taskData.game.gameId== 4}" style="text-align: center">
+                                                        <h5  ><b style="color:#FFCC33;width:100%" th:text="#{segregationMsg}"></b></h5>
+                                                        <h5 ><b style="color:#FFCC33;width:100%" th:text="#{segregationMsgSub}"></b></h5>
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <img class="d-block w-100" id="imgSelectItem"  style="align-content: center;width:400px;height:400px" th:src="@{${taskData.dragItems.get(0).image}}">
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div th:each="item,itrstat : ${taskData.dropItems}" class="col">
+                                                            <img  th:src="@{${item.plasticCategory.image}}" style="align-content: center;width: 90px;height: auto;" th:id="'idDropItem'+${itrstat.index}" class="option op1"  th:onclick="detectOption([[${itrstat.index}]])">
+                                                            <p class="text-center" style="background-color: #FFCC33;" th:text="${item.plasticCategory.category}"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="display: none">
+                                                        <button class="btn btn-block btn-info nextq" style="float: left;width: 100px;" onclick="nextQ()" >Next</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" th:if="${taskData.game.gameId== 2 }">
+
+                                                <div class="col-md-12  quiz-div-inner">
+                                                    <div class="sada-container table-responsive-lg" style="padding:25px;">
+                                                        <div id="divWeightGameOver" class="container" style="display:none;">
+                                                            <img width="100%" src="/student_assets/static/img/weight_calculator_compelete.jpg">
+                                                            <div class="row">
+                                                                
+                                                                <button id="submitgameweight_final"  type="submit"  class="btn btn-primary mr-2" onclick="clickSubmitWeightGame()" th:text="#{textSubmit}"></button>
+
+                                                            </div>
+                                                        </div>
+                                                        <div id="divWeightgame" class="container">
+                                                            <div class="row">
+                                                                <div class="col-md-12 text-center header_b">
+                                                                    Calculate weight of your plastic waste items
+                                                                </div>
+                                                            </div>
+                                                            <table  class="table table-bordered border-dark">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Icon</th>
+                                                                    <th>Item Name</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>Weight(gms)</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr th:each="weightItem,itrstat : ${taskData.weightCalculatorItems}">
+                                                                    <td><img class="image_game_drop"    th:id="${itrstat.index}" th:src="@{${weightItem.image}}" style="width: 130px;height: 130px;"></td>
+                                                                    <td th:text="${weightItem.name}"></td>
+                                                                    <td>
+                                                                        <input type="number"  class="form-control" th:id="'itemQuantity'+${itrstat.index}"  th:onchange="calculateWeightItems([[${itrstat.index}]])" style="align-self: center;"  placeholder="Quantity">
+                                                                    </td>
+                                                                    <td><p th:id="'itemTotalWeight'+${itrstat.index}" style="align-self: center;word-wrap: break-word;"> </td>
+                                                                </tr>
+                                                                <tr><td></td><td></td><td>Total Weight Calculated (in gms ) :</td><td><p id="totalWeight" style="align-self: center;word-wrap: break-word;"></td></tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+                                                        <div class="controller" style="padding:25px;">
+                                                            <button id="submitgameweight"  type="submit"  class="btn btn-block btn-warning mr-2" style="margin:0 auto;float:right;font-weight: bold;" onclick="clickWeightGame()" th:text="#{textSubmit}"></button>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            </div>
+                                            <div class="row" th:if="${taskData.game.gameId ==3 }">
+
+                                                <div class="col-12 col-md-12 col-xl-12">
+                                                    <!-- Image Map Generated by http://www.image-map.net/ -->
+                                                    <div class="row" id="divGameLoader" style="display: none">
+                                                        <div class="text-center">
+                                                            <div class="loading">
+                                                                <h2 class="animation-text" style="color: black">Please Wait ! Game Is Loading....</h2>
+                                                                <span></span>
+                                                                <span></span>
+                                                                <span></span>
+                                                                <span></span>
+                                                                <span></span>
+                                                                <span></span>
+                                                                <span></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="divGameMultiple" class="row" style="display: none;text-align: center;display: block">
+                                                        <img id="imgGameFindObject" style="display: none;height: auto;width: auto" src="/images/game_pic.png"  usemap="#mapGameFindObject" >
+                                                        <img id="imgGameFindObjectSuccess" style="display: none" src="/images/plastic_object_success.jpg">
+
+                                                       <!-- <map name="image-map" id="mapGameFindObject">
+                                                            <area   onclick="pickObject(4)"   coords="516,407,517,444,572,450,572,414,538,406" shape="poly">
+                                                            <area    onclick="pickObject(10)"   coords="389,872,423,855,487,855,482,962,440,984,386,982,389,913,387,896,384,885" shape="poly">
+                                                            <area   onclick="pickObject(11)"  coords="552,939,601,907,638,912,664,926,667,948,650,965,615,973,569,963" shape="poly">
+                                                            <area  onclick="pickObject(13)"    coords="706,986,27" shape="circle">
+                                                            <area  onclick="pickObject(7)"    coords="752,913,752,840,759,813,784,820,794,822,805,845,813,862,822,888,822,901,755,925,769,937,757,923,752,917" shape="poly">
+                                                            <area  onclick="pickObject(6)"     coords="696,643,715,677,781,658,777,621,777,578,767,517,727,521" shape="poly">
+                                                            <area   onclick="pickObject(12)"     coords="861,492,861,570,906,585,930,572,930,484,913,431,891,433" shape="poly">
+                                                            <area  onclick="pickObject(8)"     coords="752,695,757,731,784,729,783,688,786,665" shape="poly">
+                                                            <area  onclick="pickObject(2)"      coords="883,623,876,728,906,723,908,640,898,634" shape="poly">
+                                                            <area  onclick="pickObject(0)"    coords="1174,966,1057,992,942,971,947,807,1061,787,1074,600,1168,580,1179,744" shape="poly">
+                                                            <area   onclick="pickObject(1)"     coords="1044,551,1076,567,1098,517,1068,500" shape="poly">
+                                                            <area   onclick="pickObject(9)"      coords="1235,204,1242,175,1310,192,1322,217,1281,222" shape="poly">
+                                                            <area   onclick="pickObject(5)"     coords="542,733,547,791,547,848,716,832,691,712,650,702,615,726,650,735,649,784,621,759,572,757,565,726,549,716" shape="poly">
+                                                            <area   onclick="pickObject(3)"   coords="1434,951,1336,968,1288,953,1346,919,1380,949" shape="poly">
+                                                        </map>-->
+
+                                                        <map name="mapGameFindObject" id="mapGameFindObject">
+                                                            <area onclick="pickObject(0)" target="_blank" alt="bottle in hand(1263-192)" title="bottle in hand(1263-192)"  coords="510,95,549,106,564,101,556,86,516,74" shape="poly">
+                                                            <area onclick="pickObject(1)" target="_blank" alt="pepsi cup on the table(774-703)" title="pepsi cup on the table(774-703)"  coords="222,394,224,415,242,414,239,386,243,373,232,376,226,386" shape="poly">
+                                                            <area onclick="pickObject(2)" target="_blank" alt="pepsi cup(1087-525)" title="pepsi cup(1087-525)"  coords="408,274,393,304,416,311,432,282,424,277,432,259,421,270" shape="poly">
+                                                            <area onclick="pickObject(3)" target="_blank" alt="plastic carry bag(741-581)" title="plastic carry bag(741-581)"  coords="186,354,195,374,212,376,240,363,233,257,224,305,214,300,215,268,204,292" shape="poly">
+                                                            <area onclick="pickObject(4)" target="_blank" alt="plastic duck(708-988)" title="plastic duck(708-988)"  coords="176,560,188,575,208,570,202,559,184,553" shape="poly">
+                                                            <area onclick="pickObject(5)" target="_blank" alt="plastic chair(1128-672)" title="plastic chair(1128-672)"  coords="341,454,405,442,418,331,472,318,484,450,476,557,462,557,462,445,423,455,421,557,410,574,394,566,394,470,388,554,362,550,359,463,345,476,347,559,332,558,332,482,332,470" shape="poly">
+                                                            <area onclick="pickObject(6)" target="_blank" alt="plastic garbage bucket(430-916)" title="plastic garbage bucket(430-916)"  coords="0,498,24,484,57,486,52,551,28,568,0,563" shape="poly">
+                                                            <area onclick="pickObject(7)" target="_blank" alt="plastic slipers(1356-936)" title="plastic slipers(1356-936)"  coords="548,544,583,524,600,545,635,544,576,554,558,553" shape="poly">
+                                                            <area onclick="pickObject(8)" target="_blank" alt="plastic switch board(559-422)" title="plastic switch board(559-422)"  coords="76,214,77,237,112,242,113,220" shape="poly">
+                                                            <area onclick="pickObject(9)" target="_blank" alt="plastic toy penguin(791-881)" title="plastic toy penguin(791-881)"  coords="220,526,220,475,229,458,254,485,263,518,253,526,241,519,232,531" shape="poly">
+                                                            <area  onclick="pickObject(10)" target="_blank" alt="plastic tricycle(625-786)" title="plastic tricycle(625-786)"  coords="160,446,163,476,202,470,176,396,99,408,99,433,97,486,139,467,146,449,151,446" shape="poly">
+                                                            <area onclick="pickObject(11)" target="_blank" alt="plastic toy car(604-920)" title="plastic toy car(604-920)"  coords="98,542,116,553,143,558,176,538,144,518,112,527" shape="poly">
+                                                            <area onclick="pickObject(12)" target="_blank" alt="water bottle(894-688)" title="water bottle(894-688)"  coords="296,349,295,412,312,406,310,352" shape="poly">
+                                                            <area onclick="pickObject(13)" target="_blank" alt="water jar(900-550)" title="water jar(900-550)"  coords="298,250,288,262,288,317,314,322,328,318,327,258,315,219,298,217" shape="poly">
+                                                        </map>
+                                                    </div>
+
+
+                                                    <div class="row">
+                                                        <div class="col-12 col-md-12 col-xl-12" style="display: none;text-align: center"  id="divAfterStartGameText">
+                                                            <p id="idProgressObject">
+                                                                0/14 Objects has been found.
+                                                            </p>
+                                                            <div id="countdown">01: 00</div>
+                                                        </div>
+
+                                                        <div class="col-12 col-md-12 col-xl-12" style="text-align: center;margin-top: 25px;" id="divBeforeStartText">
+                                                            <p style="font-size: large">
+                                                                Find the plastic objects in the image and click on them to select the right object. You have 60 seconds to find all 14 items. Good Luck.
+                                                            </p>
+                                                            <button id="btmStartFindObject" type="submit"   class="btn btn-success mr-2" >Start</button>
+
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+                                            <div   class="controller" style="padding:25px;text-align: center">
+                                                <button  id="submitgame" class="btn btn-block btn-success" style="margin:0 auto;font-weight: bold;display: none" th:text="#{textSubmit}" onclick="clickSubmitWeightGame()">\</button>
+                                            </div>
+                                        </div>
+
+                                          </div>
+
+
+                                </div>
+                                <div class="col-md-12 quiz-div-inner" id="video2" th:unless="${taskData.videoUrl2==null}" style="display: none"   >
+                                    <div class="sada-container" >
+                                        <div class="q-set">
+                                            <video id="vp2" style="height: 350px;width: 100%;" onended="endVideo2()" oncontextmenu="return false;" controls disablePictureInPicture controlslist="nodownload noremoteplayback noplaybackrate foobar"
+                                            <source th:src="@{${taskData.videoUrl2}}" type="video/mp4" />
+                                            </video>
+                                        </div>
+
+                                        <div class="controller" style="padding:25px;">
+                                            <button id="videoback" class="btn btn-block btn-info" style="font-weight: bold;float:left" th:text="#{textBack}"></button>
+                                            <button id="nextvideo2" class="btn btn-block btn-success" style="margin:0 auto;display: none; float:right;font-weight: bold;" th:text="#{textNext}"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 quiz-div-inner" id="quiz"  style="display: none">
+                                    <div class="sada-container">
+                                        <div class="q-set" th:each="quiz,iterStat : ${taskData.quiz}">
+                                            <div class="question-format">
+                                                <span class="q-sl" th:text="${iterStat.index+1}+'.'">1.</span>
+                                                <span class="q" th:text="${quiz.question}"></span>
+                                            </div>
+                                            <div class="answer-format">
+                                            <div class="options" id="options" th:each="quizoption,iterStat2 : ${quiz.quizOptions}">
+                                                <div th:unless="${taskData.quiz.size()==1}">
+                                                    <input   class="form-check-input"
+                                                            type="radio"
+                                                            th:name="radio_quiz+${quiz.quizId}"
+                                                            th:value="${quizoption.quizOptionId}" aria-label>
+                                                    <label class="form-check-label" th:text="${quizoption.quizChoice}"></label>
+                                                </div>
+                                                <div th:unless="${taskData.quiz.size()>1}">
+                                                    <input       class="form-check-input"
+                                                            type="radio"
+                                                            th:name="radio_quiz+${iterStat.index}"
+                                                            th:value="${quizoption.quizOptionId}" aria-label>
+                                                    <label class="form-check-label" th:text="${quizoption.quizChoice}"></label>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="controller" style="padding:25px;margin-bottom: 32px;">
+
+                                            <button id="backquiz" class="btn btn-block btn-info" style="font-weight: bold;float: left" th:text="#{textBack}"></button>
+                                            <button id="submitquiz" class="btn btn-block btn-success" style="margin:0 auto;float:right;font-weight: bold;" th:text="#{textSubmit}"></button>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 quiz-div-inner" id="score_quiz" style="display: none">
+                                    <div class="sada-container" style="padding:25px;">
+                                        <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-12 text-center header_a" style="background-color: #99C5AE;margin-top:25px;">
+                                                Score Card
+                                            </div>
+                                        </div>
+                                            <div class="row">
+                                                <div class="col-md-12 text-center" style="margin-top:25px;">
+                                                    <div class="score">
+                                                        Your Score: <span id="quizscore" class="scored-point"></span>
+                                                    </div>
+                                                    <div class="statement">
+                                                       Correct answers are:
+                                                    </div>
+                                                    <div id="idScoreQuizDetail" class="asked-question-set">
+                                                     
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="controller text-center" style="padding:25px;">
+                                            <div class="btn-gap">
+                                                <a th:href="@{${moduleDetail.deepDive}}">
+                                                    <button class="btn btn-block btn-primary" style="font-weight: bold;">Deep Dive</button>
+                                                </a>
+                                            </div>
+                                            <div class="btn-gap">
+                                                <a th:href="@{/student/module/{prog_id}(prog_id=${programModel.progId})}">
+                                                <button class="btn btn-block btn-danger" style="font-weight: bold;" >Main Menu</button>
+                                                </a>
+                                               <a th:if="${lastModule.moduleId!=moduleDetail.moduleId}" th:href="@{/student/program/{prog_id}/content/{module_id}(module_id=${(moduleDetail.moduleId+1)},prog_id=${programModel.progId})}">
+                                                   <button class="btn btn-block btn-warning" style="font-weight: bold;" >Continue</button>
+                                               </a>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                        </div>
+
+                   </div>
+                  
+               </div>
+         
+        </div>
+        
+      </div>
+      </div>
+
+
+      
+      <script src="/student_assets/vendor/js/bootstrap.min.js"></script>
+      <script src="/student_assets/vendor/js/jquery.min.js"></script>
+      <script src="/student_assets/vendor/js/aos.js"></script>
+      <script src="/student_assets/vendor/js/toastify.js"></script>
+      <!--<script type="text/javascript" src="/student_assets/vendor/js/jquery.rwdImageMaps.min.js"></script>-->
+      <script type="text/javascript" src="/js/imageMapResizer.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function(e) {
+           /* $('img[usemap]').rwdImageMaps();*/
+           
+        });
+        
+    </script>
+
+  <script type="application/javascript" th:inline="javascript">
+
+
+      const map = new Map();
+      const mapWeight = new Map();
+      const mapPickObject = new Map();
+      var dropItems = [[${taskData.dropItems}]];
+      var dragItems = [[${taskData.dragItems}]];
+      var weightCalculatorItems = [[${taskData.weightCalculatorItems}]];
+      var selectObjectItems = [[${taskData.selectObjectItems}]];
+      var moduleId=[[${moduleDetail.moduleId}]]
+      var game = [[${taskData.game}]]
+      var counter = 0;
+      var current = 0;
+      var correct_counter = 0;
+      var total_weight_cal = 0;
+      var correctItemId = [];
+      var wrongItemId = [];
+
+      var findObjectScore=0;
+      var game4Status=0;
+      dropItems.forEach(value => {
+          map.set(value.categoryId,0);
+
+      })
+      weightCalculatorItems.forEach(value => {
+          mapWeight.set(value.itemId,0);
+      })
+      selectObjectItems.forEach(value => {
+          mapPickObject.set(value.itemId,0);
+      })
+      var seconds;
+      var temp;
+      var initial_index=0;
+      var GivenTime = document.getElementById('countdown').innerHTML
+
+
+
+
+      function countdown() {
+          time = document.getElementById('countdown').innerHTML;
+          timeArray = time.split(':')
+          seconds = timeToSeconds(timeArray);
+          if (seconds == '') {
+              temp = document.getElementById('countdown');
+              temp.innerHTML = GivenTime;
+              time = document.getElementById('countdown').innerHTML;
+              timeArray = time.split(':')
+              seconds = timeToSeconds(timeArray);
+          }
+          seconds--;
+          temp = document.getElementById('countdown');
+          temp.innerHTML = secondsToTime(seconds);
+          var timeoutMyOswego = setTimeout(countdown, 1000);
+          if (secondsToTime(seconds) == '00:00') {
+              clearTimeout(timeoutMyOswego); //stop timer
+              if(game4Status==0){
+                  updateDragDropGameScore(correct_counter,correctItemId,wrongItemId,moduleId);
+                  $("#divAfterStartGameText").show();
+                  $("#imgGameFindObject").hide();
+                  $("#mapGameFindObject").hide();
+                  $("#imgGameFindObjectSuccess").show();
+              }
+
+          }
+      }
+
+      $("#btmStartFindObject").click(function () {
+          $("#divBeforeStartText").hide();
+          $("#divGameLoader").show();
+          $("#divGameMultiple").hide();
+          $('map').imageMapResize();
+          startTimerGame(20);
+      });
+      function startTimerGame(duration) {
+          var timeleft = duration;
+          var downloadTimer = setInterval(function(){
+              if(timeleft <= 0){
+                  clearInterval(downloadTimer);
+                  $("#divGameLoader").hide();
+                  $("#divAfterStartGameText").show();
+                  $("#divGameMultiple").show();
+                  $("#imgGameFindObject").show();
+                  $("#mapGameFindObject").show();
+
+                  countdown();
+              }
+              timeleft -= 1;
+          }, 1000);
+      }
+      function timeToSeconds(timeArray) {
+          var minutes = (timeArray[0] * 1);
+          var seconds = (minutes * 60) + (timeArray[1] * 1);
+          return seconds;
+      }
+
+      function secondsToTime(secs) {
+          var hours = Math.floor(secs / (60 * 60));
+          hours = hours < 10 ? '0' + hours : hours;
+          var divisor_for_minutes = secs % (60 * 60);
+          var minutes = Math.floor(divisor_for_minutes / 60);
+          minutes = minutes < 10 ? '0' + minutes : minutes;
+          var divisor_for_seconds = divisor_for_minutes % 60;
+          var seconds = Math.ceil(divisor_for_seconds);
+          seconds = seconds < 10 ? '0' + seconds : seconds;
+
+          return minutes + ':' + seconds;
+          //hours + ':' +
+
+      }
+      
+      function  endVideo1() {
+          $("#nextvideo1").show();
+      }
+
+      function  endVideo2() {
+          $("#nextvideo2").show();
+      }
+
+
+      function pickObject(index) {
+          var item=selectObjectItems[index];
+          mapWeight.set(item.itemId,mapWeight.get(item.itemId)+1);
+          if(mapWeight.get(item.itemId)==1){
+
+              showSuccessToast("Correct!")
+              ++correct_counter;
+              findObjectScore=findObjectScore+item.score;
+              correctItemId.push(item.itemId);
+              $("#idProgressObject").text(correct_counter+"/14 Objects has been found.");
+          }
+          if(correct_counter==14){
+              $("#divAfterStartGameText").show();
+              $("#imgGameFindObject").hide();
+              $("#mapGameFindObject").hide();
+              $("#imgGameFindObjectSuccess").show();
+              $("#submitgame").show();
+              game4Status=1;
+          }
+
+
+      }
+
+
+
+
+      function calculateWeightItems(index) {
+
+          var item=weightCalculatorItems[index];
+
+          mapWeight.set(item.itemId,mapWeight.get(item.itemId)+1);
+          if(mapWeight.get(item.itemId)==1){
+              ++correct_counter;
+              correctItemId.push(item.itemId)
+          }
+          var number=  $("#itemQuantity"+index).val();
+          let count = (number * item.plasticWeightPerUnit);
+          total_weight_cal=total_weight_cal+count;
+          $("#itemTotalWeight"+index).text(""+(Math.round(count * 100) / 100).toFixed(2));
+          $("#totalWeight").text(""+(Math.round(total_weight_cal * 100) / 100).toFixed(2));
+
+      }
+
+      $(function() {
+
+          $("#submitgame").click(function () {
+              updateDragDropGameScore(correct_counter,correctItemId,wrongItemId,moduleId);
+
+              $("#game_score_show").show();
+              $("#game").hide();
+          });
+
+
+      });
+      function clickWeightGame() {
+
+          $("#divWeightGameOver").show();
+          $("#divWeightgame").hide();
+          $("#submitgameweight").hide();
+          $("#spanGameTextHeader").text("Weight chart for plastic waste items");
+
+      }
+      function clickSubmitWeightGame() {
+          updateDragDropGameScore(correct_counter,correctItemId,wrongItemId,moduleId);
+         $("#game_score_show").show();
+         $("#game").hide();
+      }
+      function startTimer(duration,index) {
+          var timeleft = duration;
+          var downloadTimer = setInterval(function(){
+              if(timeleft <= 0){
+                  clearInterval(downloadTimer);
+                  var dropItem=dropItems[index];
+                  //$("#id"+key).attr('src', '/images/trash_green.jpg');
+                  $("#idDropItem"+index).attr('src',''+dropItem.plasticCategory.image);
+                  /*if(game.gameId==1){
+                      $("#id"+index).attr('src', '/images/trash.png');
+                  }    else if(game.gameId==4) {
+                      $("#id"+index).attr('src',''+dropItem.plasticCategory.image);
+                  }*/
+
+
+                  //document.getElementById("countdown").innerHTML = "Finished";
+              }
+              /*else {
+                  //$("#id"+itemId).attr('src', '/images/trash_red.jpg');
+                  //$("#divPick").append($("#"+key).innerHTML());
+                  //document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
+              }*/
+              timeleft -= 1;
+          }, 1000);
+      }
+
+      function allowDrop(eve) {
+          eve.preventDefault();
+      }
+
+
+
+
+      function drag(ev) {
+
+          ev.dataTransfer.setData("index",ev.target.id);
+
+      }
+      function drop(ev,index) {
+          ev.preventDefault();
+
+
+
+          var indexdrag = ev.dataTransfer.getData("index");
+          var dragItem=dragItems[indexdrag];
+          var key = dragItem.itemId;
+          var ans = dragItem.categoryId;
+          var dropItem=dropItems[index];
+          var initailDropItemIndex=0;
+
+
+
+
+          if(dropItem.categoryId==ans){
+            
+              map.set(dropItem.categoryId,map.get(dropItem.categoryId)+1);
+              ++correct_counter;
+              $("#id"+index).attr('src', '/images/trash_green.png');
+              correctItemId.push(dragItem.itemId);
+              $("#"+indexdrag).hide();
+              if(game.gameId==1){
+                  if(map.get(dropItem.categoryId)==1)
+                      startTimer(1,index);
+
+                  if(map.get(dropItem.categoryId)==2)
+                      ++counter;
+              }  else if(game.gameId==4){
+                  if(map.get(dropItem.categoryId)<4)
+                      startTimer(1,index);
+
+                  if(map.get(dropItem.categoryId)==4)
+                      ++counter;
+              }
+
+
+          }  else{
+              wrongItemId.push(dragItem.itemId);
+              $("#id"+index).attr('src', '/images/trash_red.png');
+              startTimer(1,index);
+          }
+
+
+
+
+          if(counter==dropItems.length){
+
+              updateDragDropGameScore(correct_counter,correctItemId,wrongItemId,moduleId);
+              $("#divGameDragDrop").hide();
+              if(game.gameId==1){
+
+                  $("#divGameDragDrop").hide();
+                  $("#dragDropHeader").hide();
+                  $("#divDragDrop7BinCorrectAns").show();
+              }    else if(game.gameId==4)   {
+                  $("#divGameDragDrop").hide();
+                  $("#segregationHeader").hide();
+                $("#divDragDrop4BinCorrectAns").show();
+              }
+          }
+      }
+
+      function showSuccessToast(text) {
+          Toastify({
+              text: text,
+              duration: 3000,
+              close: true,
+              gravity: "top", // `top` or `bottom`
+              position: "right", // `left`, `center` or `right`
+              style: {
+                  background: "linear-gradient(to right, #96c93d, #96c93d)",
+              },
+
+          }).showToast();
+      }
+      function showFailToast(text) {
+          Toastify({
+              text: text,
+              duration: 3000,
+              close: true,
+              gravity: "top", // `top` or `bottom`
+              position: "right", // `left`, `center` or `right`
+              style: {
+                  background: "linear-gradient(to right, #93291E, #93291E)",
+              },
+
+          }).showToast();
+      }
+      function detectOption(index){
+
+
+
+          var dragItem=dragItems[initial_index];
+          var key = dragItem.itemId;
+          var ans = dragItem.categoryId;
+          var dropItem=dropItems[index];
+
+          if(dropItem.categoryId==ans){
+              ++correct_counter;
+               ++initial_index;
+              map.set(dropItem.categoryId,map.get(dropItem.categoryId)+1)
+              $("#idDropItem"+index).attr('src', '/images/trash_green.png');
+              correctItemId.push(dragItem.itemId);
+
+              
+              if(initial_index<dragItems.length) {
+                  
+                  $("#imgSelectItem").attr('src', ''+dragItems[initial_index].image);
+              }
+
+              if(game.gameId==1){
+                  showSuccessToast("Correct Bin Selected!")
+                  ++counter;
+              }  else if(game.gameId==4){
+                  if(map.get(dropItem.categoryId)==1) {
+                      showSuccessToast("Correct Bin Selected!");
+                  }
+                  if(map.get(dropItem.categoryId)==2){
+                      showSuccessToast("Correct Bin Selected!");
+                      ++counter;
+                  }
+
+              }
+
+          }  else{
+              $("#idDropItem"+index).attr('src', '/images/trash_red.png');
+              wrongItemId.push(dragItem.itemId);
+              showFailToast("Wrong Bin Selected!");
+          }
+
+          startTimer(1,index);
+                
+          if(counter==dropItems.length){
+              updateDragDropGameScore(correct_counter,correctItemId,wrongItemId,moduleId);
+              $("#divGameDragDrop").hide();
+              if(game.gameId==1){
+
+                  $("#divGameDragDrop").hide();
+                  $("#divDragDrop7BinCorrectAns").show();
+              }    else if(game.gameId==4)   {
+                  $("#divGameDragDrop").hide();
+                  $("#divDragDrop4BinCorrectAns").show();
+              }
+          }
+
+
+
+      }
+
+     
+  
+      function nextQ(){
+          ++initial_index;
+          alert(dropItems[initial_index].image);
+          
+          $(".imgSelectItem").attr('src',''+dropItems[initial_index].image+'');
+          /*for (let i = 0; i < dropItems.length; i++) {
+
+              $(".idDropItem"+i).attr('src',dropItems[i].image)
+
+          }
+*/
+
+
+      }
+
+      function updateDragDropGameScore(correctCount, correctItemId, wrongItemId,moduleId) {
+
+          var scoreGameData = {
+              correctCount : correctCount,
+              correctItemId :correctItemId,
+              wrongItemId :wrongItemId,
+              moduleId : moduleId
+          };
+          $.ajax({
+              type: "POST",
+              contentType : 'application/json',
+              url: "/student/saveStudentGameScore",
+              data: JSON.stringify(scoreGameData),
+              dataType:"html",
+              success: function(data) {
+                  $("#game_score").html(data);
+                  $("#submitgame").show();
+              },
+              error: function (jqXHR) {
+                  $(document.body).text('Error: ' + jqXHR.status);
+              }
+          });
+
+      }
+  </script>
+
+  <script th:inline="javascript">
+
+      var videoUrl1 =[[${taskData.videoUrl1}]]
+      var game = [[${taskData.game}]]
+      var videoUrl2 =[[${taskData.videoUrl2}]]
+      var quiz = [[${taskData.quiz}]]
+      var moduleId=[[${moduleDetail.moduleId}]]
+      var studentId=[[${studentDetail.studentId}]]
+      var taskIdVid=[[${taskData.taskIdVid}]]
+      var taskIdVid2=[[${taskData.taskIdVid2}]]
+      var taskIdGame=[[${taskData.taskIdGame}]]
+      var taskIdQuiz=[[${taskData.taskIdQuiz}]]
+      var progId=[[${programModel.progId}]]
+      var deepDive=[[${moduleDetail.deepDive}]]
+      const quizAns = new Map();
+      const quizQuesAns = new Map();
+      //const wrongAns = new Map();
+
+
+      function functionNextVideo1(moduleId,studentId,progress,taskIdVid,progId) {
+          $.ajax({
+              type: "GET",
+              url: "/program/"+progId+"/modules/"+moduleId+"/student/"+studentId+"/saveProgress/"+progress+"/taskId/"+taskIdVid+"",
+
+              success: function(assignment) {
+
+                  $("#video1").hide();
+                  if(game!=null)
+                      $("#game").show();
+                  else
+                      $("#quiz").show();
+              },
+              error: function(xhr) {
+                  alert("Error"+xhr);
+              }
+
+          });
+      }
+
+      function functionNextGame(moduleId,studentId,progress,taskIdGame,progId) {
+          $.ajax({
+              type: "GET",
+              url: "/program/"+progId+"/modules/"+moduleId+"/student/"+studentId+"/saveProgress/"+progress+"/taskId/"+taskIdGame+"",
+
+              success: function(assignment) {
+
+                  $("#game_score_show").hide();
+                  $("#video2").show();
+              },
+              error: function(xhr) {
+                  alert("Error"+xhr);
+              }
+
+          });
+      }
+
+      function functionNextVideo2(moduleId,studentId,progress,taskIdVid2,progId) {
+          $.ajax({
+              type: "GET",
+              url: "/program/"+progId+"/modules/"+moduleId+"/student/"+studentId+"/saveProgress/"+progress+"/taskId/"+taskIdVid2+"",
+
+              success: function(assignment) {
+
+                  $("#video2").hide();
+                  $("#quiz").show();
+              },
+              error: function(xhr) {
+                  alert("Error"+xhr);
+              }
+
+          });
+      }
+
+      function functionNextQuiz(moduleId,studentId,progress,taskIdQuiz,progId,score,quizQuesAns) {
+          $.ajax({
+              type: "GET",
+              url: "/program/"+progId+"/modules/"+moduleId+"/student/"+studentId+"/saveProgress/"+progress+"/taskId/"+taskIdQuiz+"",
+
+              success: function(assignment) {
+
+
+
+
+                  var moduleId=[[${moduleDetail.moduleId}]]
+                  var deepDive=[[${moduleDetail.deepDive}]]
+                  var studentId=[[${studentDetail.studentId}]]
+                  $.ajax({
+                      type: "GET",
+                      url: "/modules/"+moduleId+"/student/"+studentId+"/addscore/"+score+"",
+
+                      success: function(scorenew) {
+
+                          $("#quizscore").text(""+score);
+                          $("#download").attr('href',deepDive);
+                          $("#quiz").hide();
+                              var html="";
+                              var i=1;
+                            quizQuesAns.forEach((value, key) => {
+                                  html=html+"<p class='asked-question'>"+i+". "+key+"<br/> Right Ans : <b class='r-ans'>"+value+"</b></p>"
+                                    i++;
+                            })
+                              /*wrongAns.forEach((value, key) => {
+                                  html=html+"<li ><p>"+key+"</p><p style='color: red'>"+value+"</p></li>\n"
+                              })*/
+                              $("#idScoreQuizDetail").html(html)
+
+
+                          $("#score_quiz").show();
+                      },
+                      error: function(xhr) {
+                          alert("Error"+xhr);
+                      }
+
+                  });
+
+              },
+              error: function(xhr) {
+                  alert("Error"+xhr);
+              }
+
+          });
+      }
+
+      function functionSubmitGame(moduleId,studentId,progress,taskIdQuiz,progId) {
+
+          $.ajax({
+              type: "GET",
+              url: "/program/"+progId+"/modules/"+moduleId+"/student/"+studentId+"/saveProgress/"+progress+"/taskId/"+taskIdQuiz+"",
+
+              success: function(assignment) {
+
+
+                  var theList = [[${taskData.quiz}]]
+                  var score=0;
+                  for (i = 0; i < theList.length; i++) {
+
+                      var ans= $("input[type='radio'][name='radio_quiz_game"+i+"']:checked").val();
+                      if(theList[i].answer==ans){
+                          score+=theList[i].score;
+
+                      }
+                  }
+
+
+                  var moduleId=[[${moduleDetail.moduleId}]]
+                  var deepDive=[[${moduleDetail.deepDive}]]
+                  var studentId=[[${studentDetail.studentId}]]
+
+
+                  $.ajax({
+                      type: "GET",
+                      url: "/modules/"+moduleId+"/student/"+studentId+"/addscore/"+score+"",
+
+                      success: function(score) {
+
+                          $("#quizscore").text(score.scoreQuiz);
+                          $("#download").attr('href',deepDive);
+                          $("#quiz").hide();
+                          $("#score_quiz").show();
+                      },
+                      error: function(xhr) {
+                          alert("Error"+xhr);
+                      }
+
+                  });
+
+              },
+              error: function(xhr) {
+                  alert("Error"+xhr);
+              }
+
+          });
+      }
+      function functionSubmitQuizGame(moduleId,studentId,progress,taskIdQuiz,progId) {
+
+          var theList = [[${taskData.quizGameList}]]
+          var score=0;
+          for (i = 0; i < theList.length; i++) {
+
+              var ans= $("input[type='radio'][name='radio_quiz_game"+i+"']:checked").val();
+              if(theList[i].answer==ans){
+                  score+=theList[i].score;
+              }
+          }
+          var scoreGameQuizData = {
+              taskIdQuiz : taskIdQuiz,
+              progress :progress,
+              studentId :studentId,
+              moduleId : moduleId,
+              progId : progId,
+              score : score
+          };
+          $.ajax({
+              type: "POST",
+              contentType : 'application/json',
+              url: "/student/saveStudentGameQuizScore",
+              data: JSON.stringify(scoreGameQuizData),
+              dataType:"html",
+              success: function(data) {
+
+
+                  $("#game_score_show").show();
+                  $("#game").hide();
+                  $("#game_score").html(data);
+              },
+              error: function (jqXHR) {
+                  $(document.body).text('Error: ' + jqXHR.status);
+              }
+          }        );
+
+
+      }
+
+
+
+      $(function() {
+
+
+          $("#resgo").click(function () {
+
+              var rates = document.getElementsByName('options');
+              var rate_value;
+              for (var i = 0; i < rates.length; i++) {
+                  if (rates[i].checked) {
+                      rate_value = rates[i].value;
+                      alert(rate_value);
+                  }
+              }
+          });
+
+          $("#nextvideo1").click(function () {
+              var progress = 0;
+              if (videoUrl2 == null) {
+                  progress = 50.0;
+              } else {
+                  progress = 25.0;
+              }
+              var media = $("#vp1").get(0);
+              media.pause();
+              media.currentTime = 0;
+              functionNextVideo1(moduleId, studentId, progress, taskIdVid, progId);
+
+
+          });
+
+          $("#gamenext").click(function () {
+              var progress = 50.0;
+              functionNextGame(moduleId, studentId, progress, taskIdGame, progId);
+
+          });
+
+          $("#nextvideo2").click(function () {
+
+              var progress = 75.0;
+              var media = $("#vp2").get(0);
+              media.pause();
+              media.currentTime = 0;
+
+              functionNextVideo2(moduleId, studentId, progress, taskIdVid2, progId);
+          });
+
+          $("#gameback").click(function () {
+
+              $("#game_score_show").hide();
+              $("#video1").show();
+
+          });
+
+          $("#videoback").click(function () {
+              $("#video2").hide();
+              $("#game").show();
+          });
+
+          $("#backquiz").click(function () {
+              $("#quiz").hide();
+
+              if (game != null)
+                  $("#video2").show();
+              else
+                  $("#video1").show();
+
+          });
+
+
+
+          $("#submitgame_quiz").click(function () {
+
+
+              var progress = 50.0;
+              functionSubmitQuizGame(moduleId, studentId, progress, taskIdQuiz, progId);
+          });
+
+          $("#submitquiz").click(function () {
+
+              var progress = 100.0;
+
+              var score=0;
+              for (i = 0; i < quiz.length; i++) {
+
+
+                  var ans= $("input[type='radio'][name='radio_quiz"+quiz[i].quizId+"']:checked").val();
+                  if(ans!=null)
+                      quizAns.set(quiz[i].quizId,ans);
+                  if(quiz[i].answer==ans){
+                      score+=quiz[i].score;
+                  }
+
+                  quiz[i].quizOptions.forEach(value => {
+                      if(quiz[i].answer==value.quizOptionId) {
+                          quizQuesAns.set(quiz[i].question, value.quizChoice);
+                      }
+                  })
+
+                  //wrongAns.delete(quiz[i].question);
+
+
+                  /*else {
+                      correctAns.delete(quiz[i].question);
+                      quiz[i].quizOptions.forEach(value => {
+                          if (ans==value.quizOptionId){
+                              wrongAns.set(quiz[i].question,value.quizChoice);
+                          }
+                      })
+
+                  }*/
+
+
+              }
+
+
+              if(quizAns.size==quiz.length){
+
+                  functionNextQuiz(moduleId, studentId, progress, taskIdQuiz, progId,score,quizQuesAns);
+              }
+              else
+                  alert("Please attempt the quiz first")
+          });
+      });
+
+
+
+
+
+  </script>
+
+          </body>
+
+
+</html>

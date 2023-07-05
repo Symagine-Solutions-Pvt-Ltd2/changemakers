@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Online School</title>
+
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="/css/all.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="/css/adminlte.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/video_player.css">
+<link rel="stylesheet" href="/css/video_player2.css">
+<link rel="stylesheet" href="/css/game_style.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+</head>
+
+<body class="hold-transition sidebar-mini">
+	<div class="wrapper2 wrapper">
+		<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+			<!-- Left navbar links -->
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" data-widget="pushmenu"
+					href="#" role="button"><i class="fas fa-bars"></i></a></li>
+
+			</ul>
+
+			<h1 class="title text-center" th:text="${programModel.programName}"></h1>
+
+			<!-- Right navbar links -->
+			<div class="complete">
+				<div class="complete">
+					<p class="com" th:text="#{textAccomplishment}"><img src="/images/trophy.png" alt="trophy" width="35" height="35"></p>
+					<button class="btn btn-outline-light" th:text="#{textDownloadCertificate}"></button>
+				</div>
+
+			</div>
+
+		</nav>
+		<!-- /.navbar -->
+
+		<!-- Main Sidebar Container -->
+		<aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+			<!-- Sidebar -->
+			<div class="sidebar">
+				<!-- Sidebar user (optional) -->
+				<div class="user-panel mt-3 pb-3 mb-3 d-flex border-0"></div>
+
+
+				<!-- Sidebar Menu -->
+				<nav class="mt-2">
+					<ul class="nav nav-pills nav-sidebar flex-column"
+						data-widget="treeview" role="menu" data-accordion="false">
+						<li class="nav-item"><a th:href="@{/student/home}"
+							class="nav-link"> <img class="pr-4"
+								src="/images/booksicon.png" width="55px"></img>
+								<p style="font-weight: bolder" th:text="#{textHome}">
+									 <i class="right fas fa-angle-left"></i>
+								</p>
+						</a></li>
+						<li class="nav-item"><a th:href="@{/student/logout}"
+							class="nav-link"> <img class="pr-4"
+								src="/images/booksicon.png" width="55px"></img>
+								<p style="font-weight: bolder" th:text="#{textLogout}">
+									 <i class="right fas fa-angle-left"></i>
+								</p>
+						</a></li>
+					</ul>
+				</nav>
+					<!-- /.sidebar-menu -->
+			</div>
+			<!-- /.sidebar -->
+		</aside>
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+
+			<!-- Main content -->
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row mt-3">
+						<div class="col-12">
+							<div class="card card-primary">
+								<div class="card-header">
+									<h3 class="card-title" th:text="${moduleDetail.moduleName}"></h3>
+								</div>
+								<div class="card-body">
+									<div class="row mt-2 ml-1 mr-2">
+										<div class="col-12 col-md-12 col-xl-12" id="video1">
+											<div class="card videocls" style="border: 1px solid black">
+
+										<div class="video-player">
+										  <video id="vp1"  onended="endVideo1()" oncontextmenu="return false;" controls disablePictureInPicture controlslist="nodownload noremoteplayback noplaybackrate foobar">
+										  <source th:src="@{${taskData.videoUrl1}}" type="video/mp4" />
+										  </video>
+										</div>
+												<div class="card-body">
+													<div class="row justify-content-between">
+														<a th:href="@{/student/home}"   th:text="#{textBack}"
+															class="btn btn-outline-warning m-1"><i
+															class="far fa-hand-point-left mr-1"></i></a>
+														<button type="button"
+															class="btn btn-success  btn-lg mr-3"
+															id="nextvideo1" style="display: none" th:text="#{textNext}">
+															Next<i class="far fa-hand-point-right ml-1"></i>
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-12 col-md-12 col-xl-12" id="game_score_show" style="display: none">
+
+											<div id="game_score">
+
+											</div>
+
+											<div class="card-body">
+												<div class="row justify-content-between">
+
+													<a id="gameback" th:text="#{textBack}" class="btn btn-outline-warning m-1"><i
+															class="far fa-hand-point-left mr-1"></i></a> <a   th:text="#{textNext}"
+																											  id="gamenext" class="btn btn-outline-danger m-1" ><i
+														class="far fa-hand-point-right ml-1"></i></a>
+											   </div></div>
+										</div>
+										<div class="col-12 col-md-12 col-xl-12" id="game" th:unless="${taskData.game==null}" style="display: none">
+											<div class="card text-center">
+												<div class="card-header" style="font-size: 30px; font-weight: 600; background-color: #99c5ae;" th:text="#{textGame}"></div>
+												<div class="card-body">
+
+													<div class="row" th:if="${taskData.game.gameId== 1 or taskData.game.gameId== 4 }">
+														 <h5 class="card-title mr-0 float-none mb-3"
+															 th:text="#{dragDropMsg}" style="width:100%"></h5>
+														 <div class="row" style="margin-top: 30px;width: 100%" >
+
+															 <div th:each="pickItem,itrstat : ${taskData.dragItems}" style="flex: 0 0 13.90%;" >
+
+																 <label class="radio_img_game_quiz" id="divPick">
+
+																	 <img class="image_game_drop"    th:id="${itrstat.index}" th:src="@{${pickItem.image}}" draggable="true" th:ondragstart="drag(event)" style="align-content: center;width: 130px;height: 130px;">
+																 </label>
+															 </div>
+
+
+														 </div>
+														 <div class="row" style="margin-top: 60px;margin-left: 30px;width: 100%">
+
+															 <div th:each="item,itrstat : ${taskData.dropItems}" style="flex: 0 0 13.99%;" >     
+																 <div ondragover="allowDrop(event)" >
+																    <div class="col-12 col-md-12 col-xl-12" style="align-content: center;width: 130px;height: 130px;">
+																		<img draggable="false"  th:ondrop="drop(event,[[${itrstat.index}]])" th:id="'id'+${itrstat.index}"  th:src="@{${item.plasticCategory.image}}" class="imgstyle2">
+																		<p th:text="${item.plasticCategory.category}" style="word-wrap: break-word;"></p>
+																	</div>
+
+																 </div>
+															 </div>
+														 </div>
+														
+
+													 </div>
+
+													<div class="row" th:if="${taskData.game.gameId== 2 }">
+														<h5 class="card-title mr-0 float-none mb-3"
+															style="width:100%">Please compute the weight of below plastic items</h5>
+														<div class="col-12 col-md-12 col-xl-12">
+															<div class="row">
+
+
+																<table class="table table-bordered" style="width: 100%;">
+																	<thead>
+																	<tr>
+																		<th>Icon</th>
+																		<th>Item Name</th>
+																		<th>Quantity</th>
+																		<th>Weight(gms)</th>
+																	</tr>
+																	</thead>
+																	<tbody>
+																	<tr th:each="weightItem,itrstat : ${taskData.weightCalculatorItems}">
+																		<td><img class="image_game_drop"    th:id="${itrstat.index}" th:src="@{${weightItem.image}}" style="width: 130px;height: 130px;"></td>
+																		<td th:text="${weightItem.name}"></td>
+																		<td>
+																			<input type="number"  class="form-control" th:id="'itemQuantity'+${itrstat.index}"  th:onchange="calculateWeightItems([[${itrstat.index}]])" style="align-self: center;"  placeholder="Quantity">
+																		</td>
+																		<td><p th:id="'itemTotalWeight'+${itrstat.index}" style="align-self: center;word-wrap: break-word;"> </td>
+																	</tr>
+																	<tr><td></td><td></td><td>Total Weight Calculated :</td><td><p id="totalWeight" style="align-self: center;word-wrap: break-word;"></td></tr>
+																	</tbody>
+																</table>
+
+															</div>
+															<div class="row">
+																
+																	<button id="submitgameweight"  type="submit"  class="btn btn-primary mr-2" onclick="clickSubmitWeightGame()" th:text="#{textSubmit}"></button>
+
+															</div>
+														</div>
+
+
+													</div>
+
+													<div class="row" th:if="${taskData.game.gameId ==3 }">
+
+															 <div class="col-12 col-md-12 col-xl-12">
+																 <!-- Image Map Generated by http://www.image-map.net/ -->
+																 <div class="row">
+																	 <img id="imgGameFindObject" style="display: none" src="/images/game4_image.jpg"  usemap="#image-map" width="100%">
+																	 <img id="imgGameFindObjectSuccess" style="display: none" src="/images/plastic_object_success.jpg"  usemap="#image-map" width="100%">
+
+																	 <map name="image-map" id="mapGameFindObject" style="display: none">
+																		 <area target="_blank"  onclick="pickObject(4)"   style="cursor: default;" coords="516,407,517,444,572,450,572,414,538,406" shape="poly">
+																		 <area target="_blank"   onclick="pickObject(10)" style="cursor: default"  coords="389,872,423,855,487,855,482,962,440,984,386,982,389,913,387,896,384,885" shape="poly">
+																		 <area target="_blank"  onclick="pickObject(11)" title="Car Toy" style="cursor: default"   coords="552,939,601,907,638,912,664,926,667,948,650,965,615,973,569,963" shape="poly">
+																		 <area target="_blank" onclick="pickObject(13)" style="cursor: default"   coords="706,986,27" shape="circle">
+																		 <area target="_blank" onclick="pickObject(7)" style="cursor: default"   coords="752,913,752,840,759,813,784,820,794,822,805,845,813,862,822,888,822,901,755,925,769,937,757,923,752,917" shape="poly">
+																		 <area target="_blank" onclick="pickObject(6)"  style="cursor: default"   coords="696,643,715,677,781,658,777,621,777,578,767,517,727,521" shape="poly">
+																		 <area target="_blank"  onclick="pickObject(12)"  style="cursor: default"   coords="861,492,861,570,906,585,930,572,930,484,913,431,891,433" shape="poly">
+																		 <area target="_blank" onclick="pickObject(8)"  style="cursor: default"   coords="752,695,757,731,784,729,783,688,786,665" shape="poly">
+																		 <area target="_blank" onclick="pickObject(2)"   style="cursor: default"   coords="883,623,876,728,906,723,908,640,898,634" shape="poly">
+																		 <area target="_blank" onclick="pickObject(0)" style="cursor: default"   coords="1174,966,1057,992,942,971,947,807,1061,787,1074,600,1168,580,1179,744" shape="poly">
+																		 <area target="_blank"  onclick="pickObject(1)"  style="cursor: default"   coords="1044,551,1076,567,1098,517,1068,500" shape="poly">
+																		 <area target="_blank"  onclick="pickObject(9)"   style="cursor: default"   coords="1235,204,1242,175,1310,192,1322,217,1281,222" shape="poly">
+																		 <area target="_blank"  onclick="pickObject(5)"  style="cursor: default"   coords="542,733,547,791,547,848,716,832,691,712,650,702,615,726,650,735,649,784,621,759,572,757,565,726,549,716" shape="poly">
+																		 <area target="_blank"  onclick="pickObject(3)"  style="cursor: default" coords="1434,951,1336,968,1288,953,1346,919,1380,949" shape="poly">
+																	 </map>
+																 </div>
+
+
+																 <div class="row">
+																	 <div class="col-12 col-md-12 col-xl-12" style="display: none"  id="divAfterStartGameText">
+																		 <p id="idProgressObject">
+																			 0/14 Objects has been found.
+																		 </p>
+																		 <div id="countdown">01: 00</div>
+																	 </div>
+
+																	<div class="col-12 col-md-12 col-xl-12" id="divBeforeStartText">
+																		<p>
+																			Find the plastic objects in the image and click on them to select the right object. You have 60 seconds to find all 14 items. Good Luck.
+																		</p>
+																		<button id="btmStartFindObject" type="submit"   class="btn btn-success mr-2" >Start</button>
+
+																	</div>
+
+															 </div>
+
+
+													 </div>
+
+												</div>
+
+														<button id="submitgame" style="display: none" type="submit"  class="btn btn-primary mr-2" th:text="#{textSubmit}" onclick="clickSubmitWeightGame()"></button>
+											</div>
+											</div>
+										</div>
+										<div class="col-12 col-md-12 col-xl-12" id="video2" th:unless="${taskData.videoUrl2==null}" style="display: none"   >
+											<div class="card videocls" style="border: 1px solid black">
+												<div class="video-player2">
+													<video id="vp2" onended="endVideo2()" oncontextmenu="return false;" controls disablePictureInPicture controlslist="nodownload noremoteplayback noplaybackrate foobar"
+													<source th:src="@{${taskData.videoUrl2}}" type="video/mp4" />
+													</video>
+												</div>
+												<div class="card-body">
+													<div class="row justify-content-between">
+														<a id="videoback" class="btn btn-outline-warning m-1"><i
+															class="far fa-hand-point-left mr-1" th:text="#{textBack}"></i></a>
+														<button type="button"
+															class="btn btn-success btn-success btn-lg mr-3"
+															id="nextvideo2" style="display: none" th:text="#{textNext}">
+															<i class="far fa-hand-point-right ml-1"></i>
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-12 col-md-12 col-xl-12" id="quiz"  style="display: none">
+											<div class="container">
+												<div class="question ml-sm-5 pl-sm-5 pt-2" th:each="quiz,iterStat : ${taskData.quiz}">
+													<div class="py-2 h5">
+														<b th:text="${iterStat.index+1}+') '+${quiz.question}"></b>
+													</div>
+													<div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3"
+														id="options"
+														th:each="quizoption,iterStat2 : ${quiz.quizOptions}">
+														<label class="options" th:unless="${taskData.quiz.size()==1}">
+														 <input 
+														    type="radio"
+															th:name="radio_quiz+${quiz.quizId}"
+															th:value="${quizoption.quizOptionId}">
+															 <span class="checkmark"></span>
+															 <span th:text="${quizoption.quizChoice}"></span>
+														</label>
+														<label class="options" th:unless="${taskData.quiz.size()>1}">
+														 <input 
+														    type="radio"
+															th:name="radio_quiz+${iterStat.index}"
+															th:value="${quizoption.quizOptionId}">
+															 <span class="checkmark"></span>
+															 <span th:text="${quizoption.quizChoice}"></span>
+														</label>
+													</div>
+												</div>
+												<div class="d-flex align-items-center pt-3">
+													<div id="backquiz">
+														<button class="btn btn-warning btn-lg" th:text="#{textBack}">
+															<i class="far fa-hand-point-left mr-1"></i>
+														</button>
+													</div>
+													<div class="ml-auto mr-sm-5">
+														<button id="submitquiz" class="btn btn-success btn-lg mr-3" th:text="#{textSubmit}">
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-12 col-md-12 col-xl-12" id="score_quiz" style="display: none">
+                                            <div class="card text-center">
+                                                <div class="card-header card-title cls1">
+                                                    Score Card
+                                                </div>
+												
+                                                <div class="card-body">
+                                                    <h5 class="card-title float-none mr-0">Your Score <span id="quizscore" class="score"></span></h5>
+													<div id="idScoreQuizDetail">
+													</div>
+
+                                                    <a href="#" id="download"  target="_blank" class="btn btn-lg btn-outline-primary m-2"><i class="fas fa-download mr-1"></i>Deep Dive</a><br>
+                                                    <a href="#" class="btn btn-outline-danger m-2"  th:href="@{/student/module/{prog_id}(prog_id=${programModel.progId})}"><i class="fas fa-reply mr-1"></i>Exit To Main</a>
+                                                    <a href="#" class="btn btn-outline-success m-2" th:if="${lastModule.moduleId!=moduleDetail.moduleId}" th:href="@{/student/program/{prog_id}/content/{module_id}(module_id=${(moduleDetail.moduleId+1)},prog_id=${programModel.progId})}" >Continue<i class="fas fa-share ml-1"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+			<!-- /.content -->
+			
+
+		</div>
+		<!-- /.content-wrapper -->
+
+		<footer class="main-footer">
+			<div class="float-right d-none d-sm-block"></div>
+			<strong>Copyright &copy; 2021 <a href="#">Online School</a>.
+			</strong> All rights reserved.
+		</footer>
+
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Control sidebar content goes here -->
+		</aside>
+		<!-- /.control-sidebar -->
+	</div>
+	<!-- ./wrapper -->
+
+	<!-- jQuery -->
+
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+	<!-- Bootstrap 4 -->
+	<script src="/js/bootstrap.bundle.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="/js/adminlte.min.js"></script>
+
+	<!-- AdminLTE for demo purposes
+        <script src="js/demo.js"></script> -->
+	<!-- Page specific script -->
+
+
+	<script type="application/javascript" th:inline="javascript">
+
+
+		const map = new Map();
+		const mapWeight = new Map();
+		const mapPickObject = new Map();
+		var dropItems = [[${taskData.dropItems}]];
+		var dragItems = [[${taskData.dragItems}]];
+		var weightCalculatorItems = [[${taskData.weightCalculatorItems}]];
+		var selectObjectItems = [[${taskData.selectObjectItems}]];
+		var moduleId=[[${moduleDetail.moduleId}]]
+		var game = [[${taskData.game}]]
+		var counter = 0;
+		var current = 0;
+		var correct_counter = 0;
+		var total_weight_cal = 0;
+		var correctItemId = [];
+		var wrongItemId = [];
+
+		 var findObjectScore=0;
+		 var game4Status=0;
+		dropItems.forEach(value => {
+			map.set(value.categoryId,0);
+
+		})
+		weightCalculatorItems.forEach(value => {
+			mapWeight.set(value.itemId,0);
+		})
+		selectObjectItems.forEach(value => {
+			mapPickObject.set(value.itemId,0);
+		})
+		var seconds;
+		var temp;
+		var GivenTime = document.getElementById('countdown').innerHTML
+
+
+
+
+		function countdown() {
+			time = document.getElementById('countdown').innerHTML;
+			timeArray = time.split(':')
+			seconds = timeToSeconds(timeArray);
+			if (seconds == '') {
+				temp = document.getElementById('countdown');
+				temp.innerHTML = GivenTime;
+				time = document.getElementById('countdown').innerHTML;
+				timeArray = time.split(':')
+				seconds = timeToSeconds(timeArray);
+			}
+			seconds--;
+			temp = document.getElementById('countdown');
+			temp.innerHTML = secondsToTime(seconds);
+			var timeoutMyOswego = setTimeout(countdown, 1000);
+			if (secondsToTime(seconds) == '00:00') {
+				clearTimeout(timeoutMyOswego); //stop timer
+				if(game4Status==0){
+					updateDragDropGameScore(correct_counter,correctItemId,wrongItemId,moduleId);
+					$("#divAfterStartGameText").show();
+					$("#imgGameFindObject").hide();
+					$("#mapGameFindObject").hide();
+					$("#imgGameFindObjectSuccess").show();
+				}
+
+			}
+		}
+
+		$("#btmStartFindObject").click(function () {
+			$("#divBeforeStartText").hide();
+			$("#divAfterStartGameText").show();
+			$("#imgGameFindObject").show();
+			$("#mapGameFindObject").show();
+			countdown();
+		});
+
+		function timeToSeconds(timeArray) {
+			var minutes = (timeArray[0] * 1);
+			var seconds = (minutes * 60) + (timeArray[1] * 1);
+			return seconds;
+		}
+
+		function secondsToTime(secs) {
+			var hours = Math.floor(secs / (60 * 60));
+			hours = hours < 10 ? '0' + hours : hours;
+			var divisor_for_minutes = secs % (60 * 60);
+			var minutes = Math.floor(divisor_for_minutes / 60);
+			minutes = minutes < 10 ? '0' + minutes : minutes;
+			var divisor_for_seconds = divisor_for_minutes % 60;
+			var seconds = Math.ceil(divisor_for_seconds);
+			seconds = seconds < 10 ? '0' + seconds : seconds;
+
+			return minutes + ':' + seconds;
+			//hours + ':' +
+
+		}
+
+
+
+
+
+		 function  endVideo1() {
+			 $("#nextvideo1").show();
+		 }
+
+		function  endVideo2() {
+			$("#nextvideo2").show();
+		}
+
+
+		function pickObject(index) {
+			var item=selectObjectItems[index];
+			mapWeight.set(item.itemId,mapWeight.get(item.itemId)+1);
+			if(mapWeight.get(item.itemId)==1){
+				++correct_counter;
+				findObjectScore=findObjectScore+item.score;
+				correctItemId.push(item.itemId);
+				$("#idProgressObject").text(correct_counter+"/14 Objects has been found.");
+			}
+			if(correct_counter==14){
+				$("#divAfterStartGameText").show();
+				$("#imgGameFindObject").hide();
+				$("#mapGameFindObject").hide();
+				$("#imgGameFindObjectSuccess").show();
+				$("#submitgame").show();
+				game4Status=1;
+			}
+		}
+
+
+
+
+	   function calculateWeightItems(index) {
+
+		var item=weightCalculatorItems[index];
+
+		   mapWeight.set(item.itemId,mapWeight.get(item.itemId)+1);
+		   if(mapWeight.get(item.itemId)==1){
+			   ++correct_counter;
+			   correctItemId.push(item.itemId)
+		   }
+		 var number=  $("#itemQuantity"+index).val();
+		   let count = (number * item.plasticWeightPerUnit);
+		   total_weight_cal=total_weight_cal+count;
+		   $("#itemTotalWeight"+index).text(""+(Math.round(count * 100) / 100).toFixed(2));
+		   $("#totalWeight").text(""+(Math.round(total_weight_cal * 100) / 100).toFixed(2));
+
+	   }
+
+		$(function() {
+
+			$("#submitgame").click(function () {
+				updateDragDropGameScore(correct_counter,correctItemId,wrongItemId,moduleId);
+
+				$("#game_score_show").show();
+				$("#game").hide();
+			});
+
+
+		});
+
+		 function clickSubmitWeightGame() {
+			 updateDragDropGameScore(correct_counter,correctItemId,wrongItemId,moduleId);
+
+			 $("#game_score_show").show();
+			 $("#game").hide();
+		 }
+		function startTimer(duration,index) {
+			var timeleft = duration;
+			var downloadTimer = setInterval(function(){
+				if(timeleft <= 0){
+					clearInterval(downloadTimer);
+					var dropItem=dropItems[index];
+					//$("#id"+key).attr('src', '/images/trash_green.jpg');
+					$("#id"+index).attr('src',''+dropItem.plasticCategory.image);
+					/*if(game.gameId==1){
+						$("#id"+index).attr('src', '/images/trash.png');
+					}    else if(game.gameId==4) {
+						$("#id"+index).attr('src',''+dropItem.plasticCategory.image);
+					}*/
+
+
+					//document.getElementById("countdown").innerHTML = "Finished";
+				}
+				/*else {
+					//$("#id"+itemId).attr('src', '/images/trash_red.jpg');
+					//$("#divPick").append($("#"+key).innerHTML());
+					//document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
+				}*/
+				timeleft -= 1;
+			}, 1000);
+		}
+
+		function allowDrop(eve) {
+				eve.preventDefault();
+		}
+
+
+
+
+		function drag(ev) {
+
+			ev.dataTransfer.setData("index",ev.target.id);
+
+		}
+		function drop(ev,index) {
+			ev.preventDefault();
+
+
+
+			var indexdrag = ev.dataTransfer.getData("index");
+			var dragItem=dragItems[indexdrag];
+
+			var key = dragItem.itemId;
+			var ans = dragItem.categoryId;
+			var dropItem=dropItems[index];
+
+
+
+
+			//$('#counter').text("Count: "+counter);
+			//$('#temp').text("Old Id:"+item.itemId);
+			/*for (let i = 0; i <plasticItem.length ; i++) {
+				var plas=plasticItem[i];
+				if(key!=plas.itemId)
+				$("#"+plas.itemId).draggable();
+			}*/
+
+
+
+
+			if(dropItem.categoryId==ans){
+				map.set(dropItem.categoryId,map.get(dropItem.categoryId)+1);
+				++correct_counter;
+				$("#id"+index).attr('src', '/images/trash_green.png');
+				correctItemId.push(dragItem.itemId);
+				$("#"+indexdrag).hide();
+				if(game.gameId==1){
+					if(map.get(dropItem.categoryId)==1)
+						startTimer(1,index);
+
+					if(map.get(dropItem.categoryId)==2)
+						++counter;
+				}  else if(game.gameId==4){
+					if(map.get(dropItem.categoryId)<4)
+						startTimer(1,index);
+
+					if(map.get(dropItem.categoryId)==4)
+						++counter;
+				}
+
+
+			}  else{
+				wrongItemId.push(dragItem.itemId);
+				$("#id"+index).attr('src', '/images/trash_red.png');
+				startTimer(1,index);
+			}
+
+
+
+
+			if(counter==dropItems.length){
+				updateDragDropGameScore(correct_counter,correctItemId,wrongItemId,moduleId);
+			}
+		}
+
+		function updateDragDropGameScore(correctCount, correctItemId, wrongItemId,moduleId) {
+
+			var scoreGameData = {
+				correctCount : correctCount,
+				correctItemId :correctItemId,
+				wrongItemId :wrongItemId,
+				moduleId : moduleId
+			};
+			$.ajax({
+				type: "POST",
+				contentType : 'application/json',
+				url: "/student/saveStudentGameScore",
+				data: JSON.stringify(scoreGameData),
+				dataType:"html",
+				success: function(data) {
+			        $("#game_score").html(data);
+					$("#submitgame").show();
+				},
+				error: function (jqXHR) {
+					$(document.body).text('Error: ' + jqXHR.status);
+				}
+			});
+
+		}
+	</script>
+
+	<script th:inline="javascript">
+		
+		var videoUrl1 =[[${taskData.videoUrl1}]]
+		var game = [[${taskData.game}]]
+		var videoUrl2 =[[${taskData.videoUrl2}]]
+		var quiz = [[${taskData.quiz}]]
+		var moduleId=[[${moduleDetail.moduleId}]]
+		var studentId=[[${studentDetail.studentId}]]
+		var taskIdVid=[[${taskData.taskIdVid}]]
+		var taskIdVid2=[[${taskData.taskIdVid2}]]
+		var taskIdGame=[[${taskData.taskIdGame}]]
+		var taskIdQuiz=[[${taskData.taskIdQuiz}]]
+		var progId=[[${programModel.progId}]]
+		var deepDive=[[${moduleDetail.deepDive}]]
+		const quizAns = new Map();
+		const correctAns = new Map();
+
+
+		function functionNextVideo1(moduleId,studentId,progress,taskIdVid,progId) {
+			$.ajax({
+				type: "GET",
+				url: "/program/"+progId+"/modules/"+moduleId+"/student/"+studentId+"/saveProgress/"+progress+"/taskId/"+taskIdVid+"",
+
+				success: function(assignment) {
+
+					$("#video1").hide();
+					if(game!=null)
+						$("#game").show();
+					else
+						$("#quiz").show();
+				},
+				error: function(xhr) {
+					alert("Error"+xhr);
+				}
+
+			});
+		}
+
+		function functionNextGame(moduleId,studentId,progress,taskIdGame,progId) {
+			$.ajax({
+				type: "GET",
+				url: "/program/"+progId+"/modules/"+moduleId+"/student/"+studentId+"/saveProgress/"+progress+"/taskId/"+taskIdGame+"",
+
+				success: function(assignment) {
+
+					$("#game_score_show").hide();
+					$("#video2").show();
+				},
+				error: function(xhr) {
+					alert("Error"+xhr);
+				}
+
+			});
+		}
+
+		function functionNextVideo2(moduleId,studentId,progress,taskIdVid2,progId) {
+			$.ajax({
+				type: "GET",
+				url: "/program/"+progId+"/modules/"+moduleId+"/student/"+studentId+"/saveProgress/"+progress+"/taskId/"+taskIdVid2+"",
+
+				success: function(assignment) {
+
+					$("#video2").hide();
+					$("#quiz").show();
+				},
+				error: function(xhr) {
+					alert("Error"+xhr);
+				}
+
+			});
+		}
+
+		function functionNextQuiz(moduleId,studentId,progress,taskIdQuiz,progId,score,correctAns) {
+			$.ajax({
+				type: "GET",
+				url: "/program/"+progId+"/modules/"+moduleId+"/student/"+studentId+"/saveProgress/"+progress+"/taskId/"+taskIdQuiz+"",
+
+				success: function(assignment) {
+
+
+				
+
+					var moduleId=[[${moduleDetail.moduleId}]]
+					var deepDive=[[${moduleDetail.deepDive}]]
+					var studentId=[[${studentDetail.studentId}]]
+					$.ajax({
+						type: "GET",
+						url: "/modules/"+moduleId+"/student/"+studentId+"/addscore/"+score+"",
+
+						success: function(scorenew) {
+
+							$("#quizscore").text(""+score);
+							$("#download").attr('href',deepDive);
+							$("#quiz").hide();
+							if(correctAns.size>0){
+								  var html="";
+								correctAns.forEach((value, key) => {
+									 html=html+"<li>Q:"+key+"; Ans:"+value+"</li>\n"
+                                    })
+
+								$("#idScoreQuizDetail").html("<p class=\"card-text mb-0\" style=\"font-size:26px;\">Correct answers are:</p>\n" +
+										"<ol class=\"centerol\">\n" +html+
+										"</ol>")
+							} else{
+								$("#idScoreQuizDetail").html("<p class=\"card-text mb-0\" style=\"font-size:26px;\">You answered all questions correctly.</p>\n")
+							}
+
+							$("#score_quiz").show();
+						},
+						error: function(xhr) {
+							alert("Error"+xhr);
+						}
+
+					});
+
+				},
+				error: function(xhr) {
+					alert("Error"+xhr);
+				}
+
+			});
+		}
+
+		function functionSubmitGame(moduleId,studentId,progress,taskIdQuiz,progId) {
+			
+			$.ajax({
+				type: "GET",
+				url: "/program/"+progId+"/modules/"+moduleId+"/student/"+studentId+"/saveProgress/"+progress+"/taskId/"+taskIdQuiz+"",
+
+				success: function(assignment) {
+
+
+					var theList = [[${taskData.quiz}]]
+					var score=0;
+					for (i = 0; i < theList.length; i++) {
+
+						var ans= $("input[type='radio'][name='radio_quiz_game"+i+"']:checked").val();
+						if(theList[i].answer==ans){
+							score+=theList[i].score;
+
+						}
+					}
+
+
+					var moduleId=[[${moduleDetail.moduleId}]]
+					var deepDive=[[${moduleDetail.deepDive}]]
+					var studentId=[[${studentDetail.studentId}]]
+
+
+					$.ajax({
+						type: "GET",
+						url: "/modules/"+moduleId+"/student/"+studentId+"/addscore/"+score+"",
+
+						success: function(score) {
+
+							$("#quizscore").text(score.scoreQuiz);
+							$("#download").attr('href',deepDive);
+							$("#quiz").hide();
+							$("#score_quiz").show();
+						},
+						error: function(xhr) {
+							alert("Error"+xhr);
+						}
+
+					});
+
+				},
+				error: function(xhr) {
+					alert("Error"+xhr);
+				}
+
+			});
+		}
+		function functionSubmitQuizGame(moduleId,studentId,progress,taskIdQuiz,progId) {
+
+			var theList = [[${taskData.quizGameList}]]
+			var score=0;
+			for (i = 0; i < theList.length; i++) {
+
+				var ans= $("input[type='radio'][name='radio_quiz_game"+i+"']:checked").val();
+				if(theList[i].answer==ans){
+					score+=theList[i].score;
+				}
+			}
+			var scoreGameQuizData = {
+				taskIdQuiz : taskIdQuiz,
+				progress :progress,
+				studentId :studentId,
+				moduleId : moduleId,
+				progId : progId,
+				score : score
+			};
+			$.ajax({
+				type: "POST",
+				contentType : 'application/json',
+				url: "/student/saveStudentGameQuizScore",
+				data: JSON.stringify(scoreGameQuizData),
+				dataType:"html",
+				success: function(data) {
+
+
+					$("#game_score_show").show();
+			    	$("#game").hide();
+					$("#game_score").html(data);
+				},
+				error: function (jqXHR) {
+					$(document.body).text('Error: ' + jqXHR.status);
+				}
+			}        );
+
+
+		}
+        $(function() {
+
+
+			$("#resgo").click(function () {
+
+				var rates = document.getElementsByName('options');
+				var rate_value;
+				for (var i = 0; i < rates.length; i++) {
+					if (rates[i].checked) {
+						rate_value = rates[i].value;
+						alert(rate_value);
+					}
+				}
+			});
+
+			$("#nextvideo1").click(function () {
+				var progress = 0;
+				if (videoUrl2 == null) {
+					progress = 50.0;
+				} else {
+					progress = 25.0;
+				}
+				var media = $("#vp1").get(0);
+				media.pause();
+				media.currentTime = 0;
+				functionNextVideo1(moduleId, studentId, progress, taskIdVid, progId);
+				
+
+			});
+
+			$("#gamenext").click(function () {
+				var progress = 50.0;
+				functionNextGame(moduleId, studentId, progress, taskIdGame, progId);
+
+			});
+
+			$("#nextvideo2").click(function () {
+
+				var progress = 75.0;
+				var media = $("#vp2").get(0);
+				media.pause();
+				media.currentTime = 0;
+
+				functionNextVideo2(moduleId, studentId, progress, taskIdVid2, progId);
+			});
+
+			$("#gameback").click(function () {
+
+				$("#game_score_show").hide();
+				$("#video1").show();
+
+			});
+
+			$("#videoback").click(function () {
+				$("#video2").hide();
+				$("#game").show();
+			});
+
+			$("#backquiz").click(function () {
+				$("#quiz").hide();
+
+				if (game != null)
+					$("#video2").show();
+				else
+					$("#video1").show();
+
+			});
+
+
+
+			$("#submitgame_quiz").click(function () {
+
+
+				var progress = 50.0;
+				functionSubmitQuizGame(moduleId, studentId, progress, taskIdQuiz, progId);
+			});
+
+			$("#submitquiz").click(function () {
+
+				var progress = 100.0;
+
+				var score=0;
+				for (i = 0; i < quiz.length; i++) {
+
+					var ans= $("input[type='radio'][name='radio_quiz"+quiz[i].quizId+"']:checked").val();
+					if(ans!=null)
+					quizAns.set(quiz[i].quizId,ans);
+						if(quiz[i].answer==ans){
+							score+=quiz[i].score;
+							correctAns.delete(quiz[i].question);
+						} else {
+						var options=quiz[i].quizOptions;
+
+							options.forEach(value => {
+								if (ans==value.quizOptionId){
+									correctAns.set(quiz[i].question,value.quizChoice);
+								}
+							})
+
+						}
+
+
+				}
+
+
+				 if(quizAns.size==quiz.length){
+
+
+
+					functionNextQuiz(moduleId, studentId, progress, taskIdQuiz, progId,score,correctAns);
+				 }
+				  else
+				  	alert("Please attempt the quiz first")
+			});
+		});
+
+		$('map').imageMapResize();
+    </script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/imageMapResizer.min.js"></script>
+
+
+</body>
+
+</html>

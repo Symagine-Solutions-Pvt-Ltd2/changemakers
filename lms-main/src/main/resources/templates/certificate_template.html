@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:data="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <style>
+            @page  {
+                margin: 0;
+                width: 100%;
+                size: 297mm 210mm;
+            }
+            body, html {
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                background-image: url([[@{(${bg_image})}]]);
+                background-repeat: no-repeat;
+                background-size: 100% 65%;
+                color: black;
+                display: table;
+                font-family: Calibri;
+                font-size: 18px;
+                text-align: center;
+            }
+            .container {
+                border: 15px solid rgba(0, 0, 0, 0);
+
+                width: 2160px;
+                height: 720px;
+                display: table-cell;
+                vertical-align: middle;
+            }
+            .logo {
+                color: tan;
+            }
+            .img-fluid {
+                max-width: 200px;
+            }
+
+            .marquee {
+                border-bottom: 2px solid white;
+                color: tan;
+                font-size: 48px;
+                margin: 40px auto;
+                width: 400px;
+            }
+            .assignment {
+                margin: 20px;
+            }
+            .person {
+                font-size: 32px;
+                font-style: italic;
+                margin: 20px auto;
+                width: 400px;
+            }
+            .reason {
+                margin: 20px;
+            }
+            .row-reason{
+                display: inline-block;
+                text-align: center
+            }
+            .footcol{
+                display: inline;
+                width: 300px;
+                text-align: center;
+                float: left;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+
+            <div class="marquee" style="color: white;">
+                CERTIFICATE
+            </div>
+
+            <div class="assignment" style="font-weight: bold;">
+                This is to certify that
+            </div>
+
+            <div class="person">
+               <p th:text="${name}"></p>
+            </div>
+
+            <div class="reason" style="font-weight: bold;">
+                successfully completed <i th:text="${countModule}"></i> modules of 
+            </div>
+
+            <div class="logo">
+               <img style="align-self: center" th:src="@{${logo}}" width="150px" class="img-fluid logo"/>
+            </div>
+
+            <div class="reason" style="font-weight: bold;">
+                YOUTH-LED ACTION AGAINST PLASTIC WASTE     <!--  Program name will show here -->     
+            </div>
+
+            <div class="reason"  th:text="${programName}">
+               
+            </div>
+
+            
+
+            <div class="reason">
+                The Changemakers program empowers students with the knowledge and tools to manage plastic waste sustainably.<br/> The aim is to engage youths to influence, inform and empower future generations.
+            </div>
+
+
+            <div class="row-reason">
+                <div class='footcol'>
+                 <p>Program certified by</p>
+                 <img th:src="@{${certfied_logo}}" width="200px" />
+                </div>
+ 
+                <div class='footcol'>
+                 <p>Program developed and supported by</p>
+                 <img th:src="@{${dev_sup_logo}}" width="300px" />
+                </div>
+ 
+                <div class='footcol'>
+                 <p>Program implemented by</p>
+                 <img th:src="@{${implemented_logo}}" width="200px" />
+                </div>
+             </div>
+
+        </div>
+    </body>
+</html>

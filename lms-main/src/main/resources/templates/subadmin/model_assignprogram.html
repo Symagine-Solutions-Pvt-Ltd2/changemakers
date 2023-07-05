@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<body>
+
+<select class="js-example-basic-multiple w-100"  multiple="multiple" style="width: 100%">
+
+    <option th:each="program : ${programList}" th:value="${{program.progId}}" th:text="${program.programName}"></option>
+
+</select>
+
+</body>
+</html>

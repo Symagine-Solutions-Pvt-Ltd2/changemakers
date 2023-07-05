@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<body>
+<p class="card-title mb-0" th:text="#{textModule}"></p>
+<div class="table-responsive" >
+<table  class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>No.</th>
+                          <th th:text="#{textName}"></th>
+                          <th th:text="#{textDescripton}"></th>
+                          <th th:text="#{textImage}"></th>
+                          <th th:text="#{textDeepDive}"></th>
+                          <th th:text="#{textVideo}+' '+#{textTask}"></th>
+                          <th th:text="#{textGame}+' '+#{textTask}"></th>
+                          <th th:text="#{textVideo}+' 2 '+#{textTask}">Video 2 task</th>
+                          <th th:text="#{textQuiz}+' '+#{textTask}">Quiz task</th>
+                        </tr>  
+                      </thead>
+                      <tbody>
+                        <tr th:each="module,itrStat : ${moduleList.modules}">
+                          <td th:text="${itrStat.index+1}"></td>
+                          <td class="font-weight-bold" th:text="${module.moduleName}"></td>
+                          <td th:text="${module.description}" ></td>
+                         <td  style="color:blue;text-decoration: underline; " >
+                             <a th:href="${module.image}" th:target="_blank"  style="color:black; text-decoration: underline;" th:text="${module.image}"></a>
+
+
+                         </td>
+                          <td style="color:blue;text-decoration: underline; "  >
+
+                              <a th:href="${module.DeepDive}" th:target="_blank"  style="color:black; text-decoration: underline;" th:text="${module.DeepDive}"></a>
+
+                          </td>
+                          <td  style="color:blue;text-decoration: underline; "  >
+                              <a th:href="${module.moduleTraining.videoUrl1}" th:target="_blank"  style="color:black; text-decoration: underline;" th:text="${module.moduleTraining.videoUrl1}"></a>
+
+                          </td>
+                          <td th:if="${module.moduleTraining.game!=null}" th:text="${module.moduleTraining.game.gameType}" ></td>
+                          <td th:if="${module.moduleTraining.game==null}" >No Game Added</td>
+                          <td  style="color:blue;text-decoration: underline; "  >
+                              <a th:href="${module.moduleTraining.videoUrl2}" th:target="_blank"  style="color:black; text-decoration: underline;" th:text="${module.moduleTraining.videoUrl2}"></a>
+
+
+                          </td>
+                          <td>
+                          <div  th:each="quizOption,itrStat2 : ${module.moduleTraining.quiz}">
+                           <div class="col-md-3 dropdown-menu-static-demo" style="height:auto;width: auto;">
+                       <div class="btn-group">
+                      <button type="button" class="btn btn-primary" th:text="#{textQuestion}+${' : '+quizOption.question}"></button>
+                      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="dropdownMenuSplitButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only"></span>
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuSplitButton1" style=" z-index: 10;">
+                       <h5 class="dropdown-header" style="color:purple; " th:text="#{textAnswer}+' : '+${quizOption.ans}" ></h5>
+                        <h6 class="dropdown-header" >Options :</h6>
+                         <div style="border: 0px;" th:each="op,itrStat3 : ${quizOption.quizOptions}" >
+                         <a class="dropdown-item" href="#" th:text="${op.quizChoice}"> </a>
+                         </div>
+                     
+                     
+                      </div>
+                    </div>
+                    </div>
+                          </div>
+                          
+                          
+                          
+                         <!--  <table class="table"><tr th:each="quizOption,itrStat : ${module.moduleTraining.quiz}"><td>
+                          <button class="btn btn-outline-dark btn-icon-text">
+                          <span class="d-inline-block text-left" th:text="${quizOption.question}">     
+                          </span>
+                        </button>
+                          </td></tr></table> -->
+                          </td>
+                        </tr>
+                        
+                      </tbody>
+                    </table>
+</div>
+</body>
+
+                    
+                   </html> 

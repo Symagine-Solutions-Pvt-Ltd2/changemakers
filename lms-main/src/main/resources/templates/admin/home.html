@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>LMS Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../vendors/feather/feather.css">
+  <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" type="text/css" href="../admin_assets/js/select.dataTables.min.css">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../admin_assets/css/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="../admin_assets/images/favicon.png" />
+  
+  <!-- Plugin css for this page -->
+  
+  <link rel="stylesheet" href="../vendors/select2/select2.min.css">
+  <link rel="stylesheet" href="../vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+
+</head>
+
+<body>
+
+<div id="preloder" style="display: none">
+    <div  class="loader" style="background-image: url(../admin_assets/images/spinner.gif)" >
+        
+    </div>
+</div>
+  <div class="container-scroller">
+
+
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo mr-5" ><img src="../admin_assets/images/logo_changemaker.png" style="height:59px;"  class="mr-2"/></a>
+        <a class="navbar-brand brand-logo-mini" ><img src="../admin_assets/images/logo_changemaker.png" style="height:59px;"/></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+       <!--  <ul class="navbar-nav mr-lg-2">
+          <li class="nav-item nav-search d-none d-lg-block">
+            <div class="input-group">
+              <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                <span class="input-group-text" id="search">
+                  <i class="icon-search"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+            </div>
+          </li>
+        </ul> -->
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item dropdown">
+          </li>
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img src="../admin_assets/images/faces/face45.png" alt="profile"/>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <!-- <a class="dropdown-item">
+                <i class="ti-settings text-primary"></i>
+                Settings
+              </a> -->
+              <a class="dropdown-item" th:href="@{/admin/logout}" th:text="#{textLogout}">
+                <i class="ti-power-off text-primary"></i>
+              </a>
+            </div>
+          </li>
+         <!--  <li class="nav-item nav-settings d-none d-lg-flex">
+            <a class="nav-link" href="#">
+              <i class="icon-ellipsis"></i>
+            </a>
+          </li> -->
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+    
+    
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar" style="  width: 500px;">
+        <ul class="nav" >
+          <li class="nav-item">
+            <a class="nav-link"  aria-expanded="false"th:href="@{/admin/home}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title" th:text="#{textDashboard}">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-program" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title" th:text="#{textTitleProgram}"></span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-program">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="#" id="addProgram"  th:text="#{textAddProgram}"></a></li>
+                <li class="nav-item"> <a class="nav-link" href="#" id="viewPrograms" th:text="#{textViewProgram}">View Programs</a></li>
+              </ul>
+            </div>
+          </li>
+        
+         <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-module" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title" th:text="#{textModule}"></span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-module">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="#" id="addModule" th:text="#{textAddModule}" ></a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-video" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title" th:text="#{textVideo}" ></span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-video">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="#" id="idAddVideo" th:text="#{textAddVideo}"></a></li>
+                <li class="nav-item"> <a class="nav-link" href="#" id="idViewVideo" th:text="#{textViewVideo}"></a></li>
+              </ul>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-game" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title" th:text="#{textGame}">Game</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-game">
+              <ul class="nav flex-column sub-menu">
+
+
+<!--                <li class="nav-item"> <a class="nav-link" href="#" id="idAddDragDropItems" th:text="#{textAddDragDropItems}" ></a></li>-->
+
+<!--
+                  <li class="nav-item"> <a class="nav-link" href="#" id="idAddSegregationItems" >Add Segregation Items</a></li>
+-->
+                <li class="nav-item"> <a class="nav-link" href="#" id="idViewGame" th:text="#{textViewGame}"></a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-quiz" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title" th:text="#{textQuiz}">Quiz</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-quiz">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="#" id="idAddQuiz" th:text="#{textAddQuiz}" >Add Quiz</a></li>
+                <li class="nav-item"> <a class="nav-link" href="#" id="idViewQuiz" th:text="#{textViewQuiz}">View Quiz</a></li>
+              </ul>
+            </div>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-subadmin" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title" th:text="#{textSubAdmin}">Sub Admin</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-subadmin">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="#" id="addSubAdmin" th:text="#{textAddSubAdmin}" >Add Sub Admin</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+
+
+          <!-- Modal -->
+          <div class="modal fade" id="modalEditSubAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel" th:text="#{textEdit}+' '+#{textSubAdmin}" ></h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+
+                      <div class="modal-body">
+
+
+                          <form class="forms-sample"  th:object="${editSubAdminForm}" th:action="@{editSubAdmin}" method="post" >
+
+                              <div class="form-group">
+                                  <label for="exampleInputName1" th:text="#{textName}"></label>
+                                  <input type="text" class="form-control" th:id="idName" th:field="*{name}" placeholder="Name">
+                              </div>
+                              <div class="form-group">
+                                  <label for="exampleInputEmail3" th:text="#{textEmailId}"></label>
+                                  <input type="email" class="form-control"  th:id="idEmail" th:field="*{email}" placeholder="Email">
+                              </div>
+                             
+                              <div class="form-group">
+                                  <label th:text="#{textHasAccess}"> </label>
+                                  <select class="js-example-basic-multiple w-100" th:id="idAccess" th:field="*{programs}" multiple="multiple" style="width: 100%">
+
+                                      <option th:each="program : ${programList}" th:value="${{program.progId}}" th:text="${program.programName}"></option>
+
+                                  </select>
+                              </div>
+
+                              <div class="form-group">
+                                  <label for="exampleInputPassword4" th:text="#{textOrganizationName}"></label>
+                                  <input type="text" class="form-control" th:id="idOrganization" th:field="*{organizationName}" placeholder="Organization Name">
+                              </div>
+
+
+
+                              <input type="text"  class="form-control" id="idUser" th:field="*{userId}"  style="display: none;">
+
+                              <button class="btn btn-light" data-dismiss="modal" th:text="#{textCancel}"></button>
+                              <button type="submit" class="btn btn-primary mr-2" th:text="#{textSubmit}"></button>
+
+                          </form>
+
+
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="modalEditQuiz" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel" th:text="#{textEdit}+' '+#{textQuiz}" >Edit Quiz</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      
+                      <div class="modal-body">
+                          <form class="forms-sample"  th:object="${editQuizForm}" th:action="@{editQuiz}" method="post" >
+
+                              <div class="form-group">
+                                  <label for="exampleInputName1" th:text="#{textQuestion}"></label>
+                                  <input type="text" class="form-control" th:id="question" th:field="*{question}" placeholder="Question">
+                              </div>
+
+
+                              <div class="form-group">
+                                  <div class="input-group">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text" style="color: black;" th:text="#{textOptions}+' 1 :'"> </span>
+                                      </div>
+                                      <input class="form-control" th:id="option1" th:field="*{option1}" placeholder="option 1" ></input>
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                  <div class="input-group">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text" style="color: black;" th:text="#{textOptions}+' 2 :'"> </span>
+                                      </div>
+                                      <input class="form-control" th:id="option2" th:field="*{option2}" placeholder="option 2" ></input>
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                  <div class="input-group">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text" style="color: black;" th:text="#{textOptions}+' 3 :'"> </span>
+                                      </div>
+                                      <input class="form-control" th:id="option3" th:field="*{option3}" placeholder="option 3" ></input>
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                  <div class="input-group">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text" style="color: black;" th:text="#{textOptions}+' 4 :'"> </span>
+                                      </div>
+                                      <input class="form-control" th:id="option4" th:field="*{option4}" placeholder="option 4" ></input>
+                                  </div>
+                              </div>
+
+
+                              <div class="form-group">
+                                  <label th:text="#{textAnswer}" > </label>
+                                  <select class="js-example-basic-single w-100" id="selectIndex" th:field="*{answerNumber}"   style="width: 100%">
+                                      <option value="" th:disabled="disabled" selected="true"
+                                      >Select Answer</option>
+                                      <option th:each="i: ${#numbers.sequence(1, 4)}" th:text="'Option '+${i}" th:value="${i}"></option>
+
+                                  </select>
+                              </div>
+
+
+                              <input type="text"  class="form-control" id="idQuiz" th:field="*{quizId}"  style="display: none;">
+
+                              <button class="btn btn-light" data-dismiss="modal" th:text="#{textCancel}"></button>
+                              <button type="submit" class="btn btn-primary mr-2" th:text="#{textSubmit}"></button>
+
+                          </form>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="divChangePass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel" th:text="#{textChangePass}"></h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <form class="forms-sample"  th:object="${changePassForm}" th:action="@{changePasswordUser}" method="post" >
+
+                              <div class="form-group">
+                                  <label for="exampleInputPassword4" th:text="#{textPass}"></label>
+                                  <input type="password" class="form-control" th:field="*{password}" placeholder="Password">
+                              </div>
+                              
+                              <input type="text"  class="form-control" id="inputPass" th:field="*{userId}"  style="display: none;">
+
+                              <button class="btn btn-light" data-dismiss="modal" th:text="#{textCancel}"></button>
+                              <button  class="btn btn-primary mr-2" th:text="#{textSubmit}"></button>
+
+                          </form>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="divEditVideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel" th:text="#{textEdit}+' '+#{textVideo}">Edit Video</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <form class="forms-sample"  th:object="${editVideoForm}"  th:action="@{editVideo}" method="post" >
+
+                              <div class="form-group">
+                                  <label for="exampleInputPassword4" th:text="#{textVideo}+' '+#{textTitle}"></label>
+                                  <input type="text" class="form-control" th:id="videoTitle" th:field="*{videoTitle}" placeholder="Video Title">
+                              </div>
+
+                              <div class="form-group">
+                                  <label for="exampleInputPassword4" th:text="#{textVideo}+' '+#{textURL}"></label>
+                                  <input type="text" class="form-control" th:id="videoUrlEnglish" th:field="*{videoUrlEnglish}" placeholder="Video URL">
+                              </div>
+                             <!-- <div class="form-group">
+                                  <label for="exampleInputPassword4" th:text="#{textBengali}+' '+#{textVideo}+' '+#{textURL}"></label>
+                                  <input type="text" class="form-control" th:id="videoUrlBengali" th:field="*{videoUrlBengali}" placeholder="Video URL">
+                              </div>-->
+
+                              <input type="text"  class="form-control" th:id="videoId" th:field="*{videoId}"  style="display: none;">
+
+                              <button class="btn btn-light" data-dismiss="modal" th:text="#{textCancel}"></button>
+                              <button type="submit" class="btn btn-primary mr-2" th:text="#{textSubmit}"></button>
+
+                          </form>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="divEditGame" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel" th:text="#{textEdit}+' '+#{textGame}">Edit Game</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <form class="forms-sample"  th:object="${editGameForm}"  th:action="@{editGame}" method="post" >
+
+                              <div class="form-group">
+                                  <label for="exampleInputPassword4" th:text="#{textGame}+' '+#{textName}"></label>
+                                  <input type="text" class="form-control" th:id="gameType" th:field="*{gameType}" placeholder="Game name">
+                              </div>
+
+
+
+                              <input type="text"  class="form-control" th:id="gameId" th:field="*{gameId}"  style="display: none;">
+
+                              <button class="btn btn-light" data-dismiss="modal" th:text="#{textCancel}"></button>
+                              <button type="submit" class="btn btn-primary mr-2" th:text="#{textSubmit}"></button>
+
+                          </form>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="divEditProg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" th:text="#{textEdit}+' '+#{textTitleProgram}"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<form class="forms-sample"  th:object="${editProgramForm}" enctype="multipart/form-data" th:action="@{editProgramForm}" method="post" >
+                    
+                    <div class="form-group">
+                      <label for="exampleInputPassword4" th:text="#{textName}"></label>
+                      <input type="text" class="form-control" th:id="progName" th:field="*{programName}" placeholder="Program Name">
+                    </div>
+
+    <div class="form-group">
+        <label for="exampleInputPassword4" th:text="#{textDescripton}"></label>
+        <input type="text" class="form-control" th:id="progDescription" th:field="*{description}" placeholder="Program Description">
+    </div>
+                  
+                  <div class="form-group">
+                      <label th:text="#{textTitleProgram}+' '+#{textImage}"></label>
+                      <input type="file" name="progImg" class="file-upload-default">
+                      <div class="input-group col-xs-12">
+                        <input type="text" class="form-control file-upload-info" id="progImg" disabled placeholder="Upload Program Image">
+                        <span class="input-group-append">
+                          <button class="file-upload-browse btn btn-primary" type="button" th:text="#{textUpload}"></button>
+                        </span>
+                      </div>
+                    </div>
+                  
+                  <input type="text"  class="form-control" th:id="progId" th:field="*{progId}"  style="display: none;">
+               
+                    <button class="btn btn-light" data-dismiss="modal" th:text="#{textCancel}"></button>
+                    <button type="submit" class="btn btn-primary mr-2" th:text="#{textSubmit}"></button>
+                
+                  </form>
+      </div>
+   
+    </div>
+  </div>
+</div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="divEditDragDropItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel" >Edit Plastic Items</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <form class="forms-sample" id="formEditPlastic" th:object="${editDragDropItemForm}" enctype="multipart/form-data" method="post" >
+
+                              <div class="form-group">
+                                  <label for="exampleInputName1">Item Name</label>
+                                  <input type="text" class="form-control" th:id="itemName" th:field="*{name}"   placeholder="Item Name">
+                              </div>
+
+                              <div class="form-group">
+                                  <label for="exampleInputName1">Point</label>
+                                  <input type="text" class="form-control" th:id="itemPoint"  th:field="*{point2}"  placeholder="Point">
+                              </div>
+
+                              <div  id="divWeightUnit" class="form-group" style="display: none">
+                                  <label for="exampleInputName1">Weight Per Unit</label>
+                                  <input type="text" class="form-control" th:id="itemWeightPerUnit"  th:field="*{plasticWeightPerUnit}"  placeholder="Weight Per Unit">
+                              </div>
+                              
+
+                              <div class="form-group">
+                                  <label th:text="#{textUpload}+' '+#{textImage}"></label>
+                                  <input type="file" name="imagePlasticDragDrop" class="file-upload-default">
+
+                                  <div class="input-group col-xs-12">
+
+                                      <input type="text" class="form-control file-upload-info" id="itemImg" name="videoEnglish" disabled placeholder="Upload Image">
+
+                                      <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-primary" type="button" th:text="#{textUpload}" ></button>
+                            </span>
+
+                                  </div>
+                              </div>
+
+
+                              <input type="text"  class="form-control" th:id="itemId" th:field="*{itemId}"  style="display: none;">
+
+                              <button class="btn btn-light" data-dismiss="modal" th:text="#{textCancel}"></button>
+                              <button type="submit" class="btn btn-primary mr-2" onclick="formSubmitEditPlastic();" id="btnEditSubmit" th:text="#{textSubmit}"></button>
+
+                          </form>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+
+          <!-- Modal -->
+          <div th:unless="${message.isEmpty()}">
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" th:text="#{textMessage}"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+ <p th:text=${message}></p>
+      </div>
+      <div class="modal-footer">
+      <!--   <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button> -->
+        <button type="button" class="btn btn-primary" data-dismiss="modal" th:text="#{textOK}"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ </div> 
+      
+      
+        <div class="content-wrapper">
+          <div class="col-12 grid-margin stretch-card">
+            <div class="col-md-12 grid-margin">
+              <div class="row">
+
+                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                  <h3 class="font-weight-bold" th:text="#{textWelcomeAdmin}"></h3>
+                  <h6 class="font-weight-normal mb-0" th:text="#{textWelcomeMsg}"></h6>
+                </div>
+                <div class="col-12 col-xl-4">
+                 <div class="justify-content-end d-flex">
+                    <!-- <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                      <button id="btnLanguage"  style="background-color: #ffbf00;width:150px;" class="btn btn-sm  dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                             <i class="mdi mdi-calendar"></i> Select Language
+                         </button>
+                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2" >
+
+                         </div>
+                     </div>-->
+                 </div>
+                </div>
+                  
+              </div>
+            </div>
+          </div>
+
+
+            <div class="col-12 grid-margin stretch-card" id="divQuizList" style="display: none">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-title mb-0" th:text="#{textQuiz}"></p>
+                            <div class="table-responsive">
+                                <table id="tableQuiz" class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th th:text="#{textQuestion}"></th>
+                                        <th th:text="#{textOptions}"></th>
+                                        <th th:text="#{textAnswer}"></th>
+                                        <th th:text="#{textAction}"></th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="quiz,itrStat : ${quizList}">
+                                        <td th:text="${itrStat.index+1}"></td>
+                                        <td class="font-weight-bold" th:text="${quiz.getQuestion()}"></td>
+                                        <td><div th:each="option,itrStat2 : ${quiz.getQuizOptions()}" style="margin-bottom: 10px;font-size: 8px;font-family:monospace;">
+
+                                            <button class="btn btn-primary btn-sm" th:id="bg+${itrStat.index}+${itrStat2.index}"  th:text="${option.getQuizChoice()}">
+                                            </button>
+
+                                        </div></td>
+                                        <td th:text="${quiz.getAns()}" ></td>
+                                        <td><button type="button" th:text="#{textEdit}" class="btn btn-outline-secondary btn-icon-text" th:onclick="getToEditQuiz([[${itrStat.index}]])"  >
+                                            
+                                            <i class="ti-file btn-icon-append"></i>
+                                        </button></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="col-12 grid-margin stretch-card" id="divProgramList" style="display: none;">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body" id="divTableData">
+                            <p class="card-title mb-0" th:text="#{textTitleProgram}"></p>
+                            <div class="table-responsive" >
+
+                                <table id="tableVideo"  class="table table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th th:text="#{textName}"></th>
+                                        <th th:text="#{textDescripton}"></th>
+                                        <th th:text="#{textImage}"></th>
+                                        <th>Belongs to </th>
+                                        <th th:text="#{textNoOfModules}"></th>
+                                        <th th:text="#{textAction}"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="program,itrStat : ${programList}"  ><td th:text="${itrStat.index+1}"></td>
+
+                                        <td id="idProgram" class="font-weight-bold"  >
+
+                                            <a href="#" id="aprogName" style="color:black; text-decoration: underline;" th:onclick="@{'getModuleByProgram('+${program.progId}+');'}" th:text="${program.programName}"></a>
+
+                                        </td>
+                                        <td th:text="${program.description}" ></td>
+                                        <td  ><a th:text="${program.imagePath}" th:attr="onclick=|openImageInNewTab('${program.imagePath}')|"></a></td>
+                                       <td>
+                                           <div class="form-group" th:unless="${program.programStandardDetails.size==0}">
+                                               <select disabled="true" class="js-example-basic-multiple w-100" multiple="multiple"  style="width: 89%">
+                                                   <option selected="true"  th:each="program,itrStat2 : ${program.programStandardDetails}" th:value="${{program.standard.standardId}}" th:text="${program.standard.standardName}"></option>
+                                               </select>    </div>
+                                           <!--
+                                                                         <div th:each="prog,itrStat2 : ${user.programAssigments}" style="margin-bottom: 10px;font-size: 8px;font-family:monospace;">
+
+                                                                       &lt;!&ndash;   <div th:switch="${itrStat2.index}">
+                                                                         <span th:case="${0}"
+                                                                       style="color: red;">Alert</span>
+                                                                         </div> &ndash;&gt;
+                                                                         <button class="btn btn-primary btn-sm" th:id="bg+${itrStat.index}+${itrStat2.index}" th:style="${prog.color}" th:text="${prog.program.programName}">
+                                                                         </button>
+
+                                                                     </div>--><span th:unless="${program.programStandardDetails.size>0}">No Standard Assigned</span>
+                                       </td>
+                                        <td th:text="${program.countModules}" ></td>
+
+                                        <td><button th:text="#{textEdit}" type="button" class="btn btn-outline-secondary btn-icon-text"   th:onclick="goToEditProgram([[${itrStat.index}]])" >
+                                            
+                                            <i class="ti-file btn-icon-append"></i>
+                                        </button></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="col-12 grid-margin stretch-card" id="divGameList" style="display: none;">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body" id="divTableGameData">
+                            <p class="card-title mb-0" th:text="#{textGame}"></p>
+                            <div class="table-responsive" >
+
+                                <table id="taskGame"  class="table table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th th:text="#{textGame}+' '+#{textName}">Game Name</th>
+                                      
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="game,itrStat : ${gameList}"  >
+
+                                        <td th:text="${itrStat.index+1}"></td>
+                                        <td ><a href="#" id="agameType" style="color:black; text-decoration: underline;" th:onclick="@{'getItemsByGame('+${game.gameId}+');'}"  th:text="${game.gameType}"></a></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 grid-margin stretch-card" id="divVideoList" style="display: none;">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title mb-0" th:text="#{textVideo}"></p>
+                  <div class="table-responsive" id="">
+                
+                    <table id="taskProgram"  class="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>No.</th>
+                          <th th:text="#{textVideo}+' '+#{textTitle}">Video Title</th>
+                          <!--<th th:text="#{textVideo}+' '+#{textEnglish}+' '+#{textVersion}"></th>-->
+                        <!--  <th th:text="#{textVideo}+' '+#{textBengali}+' '+#{textVersion}"></th>-->
+                          <th th:text="#{textAction}"></th>
+                        </tr>  
+                      </thead>
+                      <tbody>
+                        <tr th:each="video,itrStat : ${videoList}"  >
+                   
+                          <td th:text="${itrStat.index+1}"></td>
+                            <td  >
+                                <a th:href="${video.videoUrlEnglish}" th:target="_blank"  style="color:black; text-decoration: underline;" th:text="${video.videoTitle}"></a>
+                            </td>
+                        <!--  <td id="idVideo" class="font-weight-bold"  >
+                          
+                          <a th:href="${video.videoUrlEnglish}" th:target="_blank"  style="color:black; text-decoration: underline;" th:text="${video.videoUrlEnglish}"></a>
+
+                          </td>-->
+
+                          <!--  <td id="idVideo2" class="font-weight-bold"  >
+
+                                <a th:href="${video.videoUrlBengali}" th:target="_blank"  style="color:black; text-decoration: underline;" th:text="${video.videoUrlBengali}"></a>
+
+                            </td>-->
+
+                            <td><button type="button" class="btn btn-outline-secondary btn-icon-text"   th:onclick="goToEditVideo([[${itrStat.index}]] )" >
+                          Edit
+                          <i class="ti-file btn-icon-append"></i>                          
+                        </button></td>
+                            
+                        </tr>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+       
+            <div class="col-12 grid-margin stretch-card" id="divSubAdminList" >
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title mb-0" th:text="#{textSubAdmin}"></p>
+                  <div class="table-responsive">
+                    <table  class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>No.</th>
+                          <th th:text="#{textName}"></th>
+                          <th th:text="#{textEmailId}"></th>
+                          <th th:text="#{textAccessPrograms}"></th>
+                          <th th:text="#{textSchoolRegistered}" ></th>
+                          <th th:text="#{textStudentRegistered}"></th>
+                          <th th:text="#{textCertificateIssued}"></th>
+                          <th th:text="#{textAction}"></th>
+                        </tr>  
+                      </thead>
+                      <tbody>
+                         <tr th:each="user,itrStat : ${subAdminList}">
+                          <td th:text="${itrStat.index+1}"></td>
+                          <td class="font-weight-bold" th:text="${user.name}"></td>
+                          <td th:text="${user.email}" ></td>
+                          <td style="width:50%">
+                              <div class="form-group" th:unless="${user.programAssigments.size==0}">
+                              <select disabled="true" class="js-example-basic-multiple w-100" multiple="multiple"  style="width: 89%">
+                             <option selected="true"  th:each="prog,itrStat2 : ${user.programAssigments}" th:value="${{prog.program.progId}}" th:text="${prog.program.programName}"></option>
+                              </select>    </div>
+<!--
+                              <div th:each="prog,itrStat2 : ${user.programAssigments}" style="margin-bottom: 10px;font-size: 8px;font-family:monospace;">
+                         
+                            &lt;!&ndash;   <div th:switch="${itrStat2.index}">
+                              <span th:case="${0}"
+                            style="color: red;">Alert</span>
+                              </div> &ndash;&gt;
+                              <button class="btn btn-primary btn-sm" th:id="bg+${itrStat.index}+${itrStat2.index}" th:style="${prog.color}" th:text="${prog.program.programName}">
+                              </button>
+                         
+                          </div>--><span th:unless="${user.programAssigments.size>0}">No Programs Assigned</span></td>
+                          <td th:text="${user.schoolsRegistered}" ></td>
+                          <td th:text="${user.studentsRegistered}"></td> 
+                          <td class="font-weight-medium" th:text="${user.certificatesIssued}"><div ></div></td>
+                            <td >
+
+                                <button type="button" th:text="#{textReset}+' '+#{textPass}" id="btnReset" style="height: 40px;width:fit-content;padding-left:15px;padding-right:12px;padding-top: 10px" class="btn btn-warning btn-icon-text" th:onclick="@{'goToChangePassword('+${user.userId}+');'}" >
+                                    <i class="ti-reload btn-icon-prepend"></i>
+                                </button>
+                                <button type="button" th:text="#{textEdit}"  style="height: 40px;width:fit-content;padding-left:15px;padding-right:12px;padding-top: 8px" class="btn btn-outline-secondary btn-icon-text" th:onclick="getToEditSubAdmin([[${itrStat.index}]])">
+
+                                    <i class="ti-file btn-icon-append"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+         
+          </div>
+
+
+
+           <div class="col-12 grid-margin stretch-card" id="cardAddModule" style="display: none;">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title" th:text="#{textAddModule}"></h4>
+                 
+                  <div th:unless="${programList.size>0}">
+                    <p class="card-description" th:text="#{textKindlyAddProgram}">
+                  </p>
+                  </div>
+                  <div th:unless="${programList.size==0}">
+                   <p class="card-description" th:text="#{textEnterDetails}">
+              
+                  </p>
+                  <form class="forms-sample" enctype="multipart/form-data" th:object="${addModuleForm}" th:action="@{addModule}" method="post"  >
+                    
+                    <div class="form-group">
+                      <label for="exampleInputName1" th:text="#{textName}" ></label>
+                      <input type="text" class="form-control" th:field="*{moduleName}" placeholder="Name">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="exampleInputName1"th:text="#{textDescripton}"></label>
+                     <textarea class="form-control" id="exampleTextarea1" rows="4" th:field="*{description}" ></textarea>
+                    </div>
+                 
+               
+                    
+                   <div class="form-group">
+                    <label th:text="#{textAssignModuleTo}+' :'"></label>
+                    <select class="js-example-basic-single w-100" th:field="*{selectedProgram}"   style="width: 100%">
+              <option value="" th:disabled="disabled" selected="true" th:text="#{textSelect}+' '+#{textTitleProgram}"
+                      ></option>
+                    <option th:each="program,itrStat : ${programList}" th:value="${{program.progId}}" th:text="${program.programName}"></option>
+      
+                    </select>
+                  </div>
+                  
+                   <div class="form-group">
+                      <label th:text="#{textModule}+' '+#{textImage}"></label>
+                      <input type="file" name="moduleImg" class="file-upload-default">
+                      <div class="input-group col-xs-12">
+                        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Module Image">
+                        <span class="input-group-append">
+                          <button class="file-upload-browse btn btn-primary" type="button" th:text="#{textUpload}"></button>
+                        </span>
+                      </div>
+                    </div>
+                 
+                  <div class="form-group">
+                      <label th:text="#{textDeepDive}"></label>
+                      <input type="file" name="deepDiveFile" class="file-upload-default">
+                      <div class="input-group col-xs-12">
+                        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Deep Dive">
+                        <span class="input-group-append">
+                          <button class="file-upload-browse btn btn-primary" type="button" th:text="#{textUpload}"></button>
+                        </span>
+                      </div>
+                    </div>
+                  
+                    <div class="form-group">
+                      <label th:text="#{textAssignModuleTask}"></label>
+                      
+                       <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" style="color: black;" th:text="#{textTask}+' '+#{textVideo}+' I:'" ></span>
+                      </div>
+                     
+                      
+                       <select class="js-example-basic-single w-100" th:field="*{videosList}"  style="width: 88%;">
+	                      <option value="" th:disabled="disabled" selected="true" th:text="#{textSelect}+' '+#{textVideo}"
+                      >Select Video</option>
+	                     <option th:each="video,itrStat : ${videoList}" th:value="${{video.videoId}}" th:text="${video.videoTitle}"></option>
+	                    </select>
+                    </div>
+                  </div>
+                      
+	                   
+	                   <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" style="color: black;" th:text="#{textTask}+' '+#{textGame}+' :'"></span>
+                      </div>
+                       <select class="js-example-basic-single w-100" th:field="*{gamesList}" style="width: 89%">
+	                      <option value=""  selected="true" th:text="#{textSelect}+' '+#{textGame}"
+                      ></option>
+	                     <option th:each="game,itrStat : ${gameList}" th:value="${{game.gameId}}" th:text="${game.gameType}"></option>
+	                    </select>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" style="color: black;" th:text="#{textTask}+' '+#{textVideo}+' II:'"></span>
+                      </div>
+                       <select class="js-example-basic-single w-100" th:field="*{videosList2}"  style="width: 88%;">
+	                      <option value=""  selected="true" th:text="#{textSelect}+' '+#{textVideo}"></option>
+	                     <option th:each="video,itrStat : ${videoList}" th:value="${{video.videoId}}" th:text="${video.videoTitle}"></option>
+	                    </select>
+                    </div>
+                  </div>
+                  
+                  
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" style="color: black;" th:text="#{textTask}+' '+#{textQuiz}+' :'"></span>
+                      </div>
+                       <select class="js-example-basic-multiple w-100" multiple th:field="*{quizsList}" style="width: 89%">
+	                      <option value="" th:disabled="disabled" selected="true" th:text="#{textSelect}+' '+#{textQuiz}"
+                      ></option>
+	                     <option th:each="quiz,itrStat : ${quizList}" th:value="${{quiz.quizId}}" th:text="${quiz.question}"></option>
+	                    </select>
+                    </div>
+                  </div>
+                    </div> 
+                
+                  
+                  
+                    <button type="submit" class="btn btn-primary mr-2" th:text="#{textSubmit}"></button>
+                    <button class="btn btn-light" th:text="#{textCancel}"></button>
+                  </form>
+                  
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="col-12 grid-margin stretch-card" id="divAddQuiz" style="display:none;">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" th:text="#{textAddQuiz}"></h4>
+                            <p class="card-description" th:text="#{textEnterDetails}">
+                            </p>
+                            <form class="forms-sample"  th:object="${addQuizForm}" th:action="@{addQuiz}" method="post"  >
+
+                                <div class="form-group">
+                                    <label for="exampleInputName1" th:text="#{textQuestion}"></label>
+                                    <input type="text" class="form-control" required th:field="*{question}" placeholder="Question">
+                                </div>
+                                
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" style="color: black;"th:text="#{textOptions}+' 1 :'"> </span>
+                                        </div>
+                                        <input class="form-control" required th:field="*{option1}" placeholder="option 1" ></input>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" style="color: black;" th:text="#{textOptions}+' 2 :'"> </span>
+                                        </div>
+                                        <input class="form-control" required th:field="*{option2}" placeholder="option 2" ></input>
+                                    </div>
+                                </div>
+            
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" style="color: black;" th:text="#{textOptions}+' 3 :'"> </span>
+                                        </div>
+                                        <input class="form-control" required th:field="*{option3}" placeholder="option 3" ></input>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" id="optionDiv4">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" style="color: black;" th:text="#{textOptions}+' 4 :'"> </span>
+                                        </div>
+                                        <input class="form-control" required  th:field="*{option4}" placeholder="option 4" ></input>
+                                        
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label th:text="#{textAnswer}" > </label>
+                                    <select class="js-example-basic-single w-100" th:field="*{answerNumber}"   style="width: 100%">
+                                        <option value="" th:disabled="disabled" selected="true"
+                                        >Select Answer</option>
+                                        <option th:each="i: ${#numbers.sequence(1, 4)}" th:text="'Option '+${i}" th:value="${i}"></option>
+
+                                    </select>
+                                </div>
+
+
+
+                                <button type="submit" class="btn btn-primary mr-2"th:text="#{textSubmit}"></button>
+                                <button class="btn btn-light" th:text="#{textCancel}"></button>
+                            </form>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 grid-margin stretch-card" id="cardAddProgram"  style="display: none;">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title" th:text="#{textAddProgram}"></h4>
+                  <p class="card-description" th:text="#{textEnterDetails}">
+                  </p>
+                  <form class="forms-sample"  th:object="${addProgramForm}" enctype="multipart/form-data" th:action="@{addProgram}" method="post" >
+                    <div class="form-group">
+                      <label for="exampleInputName1"th:text="#{textName}" ></label>
+                      <input type="text" class="form-control" th:field="*{programName}" placeholder="Name" required>
+                    </div>
+                      <div class="form-group">
+                          <label for="exampleInputName1" th:text="#{textDescripton}"></label>
+                          <input type="text" class="form-control" th:field="*{description}" placeholder="Description" required>
+                      </div>
+                   <div class="form-group">
+                      <label th:text="#{textTitleProgram}+' '+#{textImage}"></label>
+                      <input type="file" name="progImg" class="file-upload-default" required>
+                      <div class="input-group col-xs-12">
+                        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Program Image">
+                        <span class="input-group-append">
+                          <button class="file-upload-browse btn btn-primary" type="button" th:text="#{textUpload}"></button>
+                        </span>
+                      </div>
+                    </div>
+
+                      <div class="form-group">
+                          <label>Select Class : </label>
+                          <select class="js-example-basic-multiple w-90" multiple="multiple" th:field="*{standardList}"  style="width: 100%">
+                              <option value="" th:disabled="disabled" selected="true">Select Class</option>
+                              <option th:each="standard : ${standardList}" th:value="${{standard.standardId}}" th:text="${standard.standardName}"></option>
+                          </select>
+                      </div>
+                      
+                   <!--  <div class="form-group">
+                    <label>Assign Program to : </label>
+                    <select class="js-example-basic-multiple w-100"  th:field="*{users}" multiple="multiple" style="width: 100%">
+             
+                    <option th:each="user,itrStat : ${subAdminList}" th:value="${{user.userId}}" th:text="${user.name}"></option>
+      
+                    </select>
+                  </div> -->
+                  
+                  
+                    <button type="submit" class="btn btn-primary mr-2"th:text="#{textSubmit}"></button>
+                    <button class="btn btn-light" th:text="#{textCancel}"></button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 grid-margin stretch-card" id="cardAddSubAdmin" style="display: none;">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title" th:text="#{textAddSubAdmin}"></h4>
+                  <p class="card-description" th:text="#{textEnterDetails}">
+                  
+                  </p>
+                  <form class="forms-sample"  th:object="${addSubAdminForm}" th:action="@{addSubAdmin}" method="post" >
+                    <div class="form-group">
+                      <label for="exampleInputName1"th:text="#{textName}" ></label>
+                      <input type="text" class="form-control" th:field="*{name}" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail3" th:text="#{textEmailId}"></label>
+                      <input type="email" class="form-control" th:field="*{email}" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword4" th:text="#{textPassword}"></label>
+                      <input type="password" class="form-control" th:field="*{password}" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                    <label th:text="#{textHasAccess}"> </label>
+                    <select class="js-example-basic-multiple w-100"  th:field="*{programs}" multiple="multiple" style="width: 100%">
+             
+                    <option th:each="program : ${programList}" th:value="${{program.progId}}" th:text="${program.programName}"></option>
+      
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                      <label for="exampleInputPassword4" th:text="#{textOrganizationName}"></label>
+                      <input type="text" class="form-control" th:field="*{organizationName}" placeholder="Organization Name" required>
+                    </div>
+                  
+                    <button type="submit" class="btn btn-primary mr-2" th:text="#{textSubmit}"></button>
+                    <button class="btn btn-light" th:text="#{textCancel}"></button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 grid-margin stretch-card" id="divAddVideo" style="display: none;">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title" th:text="#{textAddVideo}"></h4>
+                  <p class="card-description" th:text="#{textEnterDetails}">
+                  </p>
+                  <form class="forms-sample" id="formVideo" enctype="multipart/form-data" th:object="${addVideoForm}"  th:action="@{addVideo}" method="post" >
+                      <div class="form-group">
+                          <label th:text="#{textUpload}+' '+#{textVideo}"></label>
+                          <input type="file" multiple name="videoEnglish" class="file-upload-default">
+
+                          <div class="input-group col-xs-12">
+                             <!-- <div class="input-group-prepend">
+                                  <span class="input-group-text" style="color: black;" th:text="#{textEnglish}+' :'"></span>
+                              </div>-->
+
+                              <input type="text" class="form-control file-upload-info" name="videoEnglish" disabled placeholder="Upload Video">
+
+                              <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-primary" type="button" th:text="#{textUpload}" ></button>
+                            </span>
+                              
+                          </div>
+
+                          
+                      </div>
+                      <!--<div class="form-group">
+                          <input type="file" name="videoBengali" class="file-upload-default">
+                      <div class="input-group col-xs-12">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text" style="color: black;" th:text="#{textBengali}+' :'"> </span>
+                          </div>
+                          <input type="text" class="form-control file-upload-info" name="videoBengali" disabled placeholder="Upload Video">
+                          <span class="input-group-append">
+                          <button class="file-upload-browse btn btn-primary" type="button" th:text="#{textUpload}"></button>
+                        </span>
+                      </div>
+                      </div>-->
+
+                    <button type="submit" class="btn btn-primary mr-2" onclick="submitAddVideoForm();" th:text="#{textSubmit}"></button>
+                    <button class="btn btn-light" th:text="#{textCancel}"></button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-12 grid-margin stretch-card" id="divAddDragDropItems" style="display: none;">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Add Plastic Items</h4>
+                  <p class="card-description" th:text="#{textEnterDetails}">
+                  </p>
+                  <form class="forms-sample"   enctype="multipart/form-data" th:object="${addGameDragDropForm}" th:action="@{addGameDragDrop}" method="post" >
+                    <div class="form-group">
+                      <label for="exampleInputName1">Item Name</label>
+                      <input type="text" class="form-control" th:field="*{name}"   placeholder="Item Name">
+                    </div>
+                      
+                      <div class="form-group">
+                          <label for="exampleInputName1">Point</label>
+                          <input type="number" class="form-control"  th:field="*{point}"  placeholder="Point">
+                      </div>
+
+                      <div class="form-group">
+                          <label for="exampleInputName1">Category</label>
+
+                          <select class="js-example-basic-single w-90" th:field="*{plasticCategory}" style="width: 100%">
+                              <option value="0" th:disabled="disabled" selected="true" >Select Category</option>
+                              <option th:each="category,itrStat : ${plasticDragDropCategoryList}" th:value="${{category.getCatId()}}" th:text="${category.getCategory()}"></option>
+
+                          </select>
+
+                      </div>
+
+                      <div class="form-group">
+                          <label th:text="#{textUpload}+' '+#{textImage}"></label>
+                          <input type="file" name="imagePlasticDragDrop" class="file-upload-default">
+
+                          <div class="input-group col-xs-12">
+
+                              <input type="text" class="form-control file-upload-info" name="videoEnglish" disabled placeholder="Upload Video">
+
+                              <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-primary" type="button" th:text="#{textUpload}" ></button>
+                            </span>
+
+                          </div>
+                      </div>
+
+
+                   
+                    <button type="submit" class="btn btn-primary mr-2" th:text="#{textSubmit}"></button>
+                    <button class="btn btn-light" th:text="#{textCancel}"></button>
+                  </form>
+                </div>
+              </div>
+            </div>  
+   
+        </div>
+        <!-- content-wrapper ends -->
+        
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- plugins:js -->
+  <script src="../admin_assets/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="../admin_assets/vendors/chart.js/Chart.min.js"></script>
+  <script src="../admin_assets/vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="../admin_assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="../admin_assets/js/dataTables.select.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../admin_assets/js/off-canvas.js"></script>
+  <script src="../admin_assets/js/hoverable-collapse.js"></script>
+  <script src="../admin_assets/js/template.js"></script>
+  <script src="../admin_assets/js/settings.js"></script>
+  <script src="../admin_assets/js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="../admin_assets/js/dashboard.js"></script>
+  <script src="../admin_assets/js/Chart.roundedBarCharts.js"></script>
+  <!-- End custom js for this page-->
+
+  <script src="../admin_assets/js/file-upload.js"></script>
+  <script src="../vendors/select2/select2.min.js"></script>
+  <script src="../admin_assets/js/select2.js"></script>
+  <script src="../admin_assets/js/jquery.validate.min.js"></script>
+  <script src="../admin_assets/js/jquery.validate.js"></script>
+
+<!--
+<script  type="text/javascript" th:inline="javascript" >
+    var listlanguage = [[${langList}]];
+
+    function selectLangauge(index) {
+
+        var langaugeName=listlanguage[index].languageName;
+        var languageCode=listlanguage[index].languageCode;
+
+
+        if (langaugeName != ''){
+            window.location.replace('home?lang=' + languageCode);
+        }
+    }
+</script>
+-->
+
+<script type="application/javascript">
+    
+    function formSubmitEditPlastic() {
+        //stop submit the form, we will post it manually.
+        event.preventDefault();
+
+        // Get form
+        var form = $('#formEditPlastic')[0];
+
+        // Create an FormData object
+        var data = new FormData(form);
+
+        // disabled the submit button
+        $("#btnEditSubmit").prop("disabled", true);
+
+        $.ajax({
+            type: 'POST',
+            enctype: 'multipart/form-data',
+            url: "/editGameDragDrop",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            dataType: 'html',
+            success: function(data) {
+                $("#divEditDragDropItem").modal('hide');
+                $("#btnEditSubmit").prop("disabled", false);
+                getItemsByGame(3);
+
+            },
+            error: function (jqXHR) {
+                console.log("ERROR : ", e);
+                $("#btnEditSubmit").prop("disabled", false);
+            }
+        });
+
+    }
+    
+</script>
+  <script  type="text/javascript" th:inline="javascript" >
+
+      function submitAddVideoForm() {
+
+          $("#preloder").show();
+          $("#formVideo").submit();
+        /*  var validator = $("#formVideo").validate({
+              rules: {
+                  idVideoTitle: {
+                      required: true,
+                      minlength: 3
+                  }
+              },
+              errorElement: "span",
+              idVideoTitle: {
+                  required: "Please provide a video title",
+                  minlength: "Video title  must be at least 3 characters long"
+              }
+          });*/
+         
+      }
+
+  $(function() {
+
+
+      
+	  /* quiz-video hide-show */
+      $("#addSubAdmin").click(function() {
+	      $("#divSubAdminList").hide();
+	      $("#cardAddSubAdmin").show();
+	      
+		  $("#cardAddModule").hide();
+
+		  $("#cardAddProgram").hide();
+		  $("#divProgramList").hide();
+		  
+		  $("#divAddVideo").hide();
+          $("#divVideoList").hide();
+
+		  $("#divAddDragDropItems").hide();
+          $("#divGameList").hide();
+
+          $("#divQuizList").hide();
+          $("#divAddQuiz").hide();
+          $("#divAddSegregationItems").hide();
+	  });
+
+	  $("#addModule").click(function() {
+	      $("#divSubAdminList").hide();
+	      $("#cardAddSubAdmin").hide();
+		  $("#cardAddModule").show();
+		  $("#cardAddProgram").hide();
+		  $("#divProgramList").hide();
+		  $("#divAddVideo").hide();
+		  $("#divAddDragDropItems").hide();
+          $("#divVideoList").hide();
+          $("#divGameList").hide();
+          $("#divQuizList").hide();
+          $("#divAddQuiz").hide();
+          $("#divAddSegregationItems").hide();
+	  });
+
+	  $("#addProgram").click(function() {
+	      $("#divSubAdminList").hide();
+	      $("#cardAddSubAdmin").hide();
+
+		  $("#cardAddModule").hide();
+
+		  $("#cardAddProgram").show();
+		  $("#divProgramList").hide();
+
+		  $("#divAddVideo").hide();
+          $("#divVideoList").hide();
+
+          $("#divAddDragDropItems").hide();
+          $("#divGameList").hide();
+
+          $("#divQuizList").hide();
+          $("#divAddQuiz").hide();
+          $("#divAddSegregationItems").hide();
+	  });
+
+	  $("#viewPrograms").click(function() {
+	      $("#divSubAdminList").hide();
+	      $("#cardAddSubAdmin").hide();
+		  $("#cardAddModule").hide();
+		  $("#cardAddProgram").hide();
+		  $("#divProgramList").show();
+		  $("#divAddVideo").hide();
+		  $("#divAddDragDropItems").hide();
+          $("#divVideoList").hide();
+          $("#divGameList").hide();
+          $("#divQuizList").hide();
+          $("#divAddQuiz").hide();
+          $("#divAddSegregationItems").hide();
+	  });
+
+	  $("#idAddVideo").click(function() {
+	      $("#divSubAdminList").hide();
+	      $("#cardAddSubAdmin").hide();
+		  $("#cardAddModule").hide();
+		  $("#cardAddProgram").hide();
+		  $("#divProgramList").hide();
+		  $("#divAddVideo").show();
+		  $("#divAddDragDropItems").hide();
+          $("#divVideoList").hide();
+          $("#divGameList").hide();
+          $("#divQuizList").hide();
+          $("#divAddQuiz").hide();
+          $("#divAddSegregationItems").hide();
+	  });
+
+      $("#idViewVideo").click(function() {
+          $("#divSubAdminList").hide();
+          $("#cardAddSubAdmin").hide();
+          $("#cardAddModule").hide();
+          $("#cardAddProgram").hide();
+          $("#divProgramList").hide();
+          $("#divAddVideo").hide();
+          $("#divAddDragDropItems").hide();
+          $("#divVideoList").show();
+          $("#divGameList").hide();
+          $("#divQuizList").hide();
+          $("#divAddQuiz").hide();
+          $("#divAddSegregationItems").hide();
+      });
+
+	  $("#idAddDragDropItems").click(function() {
+	      $("#divSubAdminList").hide();
+	      $("#cardAddSubAdmin").hide();
+		  $("#cardAddModule").hide();
+		  $("#cardAddProgram").hide();
+		  $("#divProgramList").hide();
+		  $("#divAddVideo").hide();
+		  $("#divAddDragDropItems").show();
+          $("#divVideoList").hide();
+          $("#divGameList").hide();
+          $("#divQuizList").hide();
+          $("#divAddQuiz").hide();
+          $("#divAddSegregationItems").hide();
+	  });
+
+      $("#idAddSegregationItems").click(function() {
+          $("#divSubAdminList").hide();
+          $("#cardAddSubAdmin").hide();
+          $("#cardAddModule").hide();
+          $("#cardAddProgram").hide();
+          $("#divProgramList").hide();
+          $("#divAddVideo").hide();
+          $("#divAddDragDropItems").hide();
+          $("#divVideoList").hide();
+          $("#divGameList").hide();
+          $("#divQuizList").hide();
+          $("#divAddQuiz").hide();
+          $("#divAddSegregationItems").show();
+      });
+
+      $("#idViewGame").click(function() {
+          $("#divSubAdminList").hide();
+          $("#cardAddSubAdmin").hide();
+          $("#cardAddModule").hide();
+          $("#cardAddProgram").hide();
+          $("#divProgramList").hide();
+          $("#divAddVideo").hide();
+          $("#divAddDragDropItems").hide();
+          $("#divVideoList").hide();
+          $("#divGameList").show();
+          $("#divQuizList").hide();
+          $("#divAddQuiz").hide();
+          $("#divAddSegregationItems").hide();
+      });
+
+      $("#idViewQuiz").click(function() {
+          $("#divSubAdminList").hide();
+          $("#cardAddSubAdmin").hide();
+
+          $("#cardAddModule").hide();
+
+          $("#cardAddProgram").hide();
+          $("#divProgramList").hide();
+
+          $("#divAddVideo").hide();
+          $("#divVideoList").hide();
+
+          $("#divAddDragDropItems").hide();
+          $("#divGameList").hide();
+
+          $("#divQuizList").show();
+          $("#divAddQuiz").hide();
+          $("#divAddSegregationItems").hide();
+      });
+
+      $("#idAddQuiz").click(function() {
+          $("#divSubAdminList").hide();
+          $("#cardAddSubAdmin").hide();
+          $("#cardAddModule").hide();
+
+
+          $("#cardAddProgram").hide();
+          $("#divProgramList").hide();
+
+          $("#divAddVideo").hide();
+          $("#divVideoList").hide();
+
+          $("#divAddDragDropItems").hide();
+          $("#divGameList").hide();
+          
+          $("#divQuizList").hide();
+          $("#divAddQuiz").show();
+          $("#divAddSegregationItems").hide();
+      });
+      
+  })
+
+      var listQuiz = [[${quizList}]];
+      var listUser = [[${subAdminList}]];
+      var listProgram = [[${programList}]];
+      var listVideo = [[${videoList}]];
+      var listDragDropItems = [[${dragDropPlasticItemList}]];
+      var listSegregationItems = [[${segregationPlasticItemList}]];
+      var listWeightCalulatorItems = [[${weightCalulatorPlasticItemList}]];
+
+      var listFindObjectPlasticItems = [[${listFindObjectPlasticItems}]];
+
+
+      
+  function goToEditVideo(index) {
+      $("#videoId").val(listVideo[index].videoId);
+      $("#videoTitle").val(listVideo[index].videoTitle);
+      $("#videoUrlEnglish").val(listVideo[index].videoUrlEnglish);
+
+      $("#divEditVideo").modal('show');
+  }
+  function goToChangePassword(userId){
+      $("#inputPass").val(userId);
+
+      $("#divChangePass").modal('show');
+  }
+  function goToEditGame(gameId,gameType) {
+      $("#gameId").val(gameId);
+      $("#gameType").val(gameType);
+      $("#divEditGame").modal('show');
+  }
+
+  function getToEditSubAdmin(index){
+      
+     var user= listUser[index];
+      $("#idUser").val(user.userId);
+      $("#idName").val(user.name);
+      $("#idEmail").val(user.email);
+      var progAssign=user.programAssigments;
+      for (let i = 0; i <listProgram.length ; i++) {
+          var prog=listProgram[i];
+          for (let j = 0; j <progAssign.length ; j++) {
+              if(prog.progId==progAssign[j].progId) {
+               $('#idAccess option[value="'+prog.progId+'"]').prop('selected', 'selected').change();
+              }
+          }
+
+      }
+      $("#idOrganization").val(user.organizationName);
+
+      $("#modalEditSubAdmin").modal('show');
+  }
+  
+  function  removeOption4() {
+           $("#optionDiv4").hide();
+      $(".js-example-basic-single option[value='4']").remove();
+
+  }
+  
+  function getToEditQuiz(index){
+      
+      var qptions=listQuiz[index].quizOptions;
+      var answer= listQuiz[index].answer;
+      $("#idQuiz").val(listQuiz[index].quizId);
+      $("#question").val(listQuiz[index].question);
+      for (let i =1 ; i <=qptions.length; i++) {
+          $("#option"+i+"").val(qptions[i-1].quizChoice);
+           if(qptions[i-1].quizOptionId === answer)
+               $('#selectIndex option[value="'+i+'"]').prop('selected', 'selected').change();
+          
+      }
+      $("#modalEditQuiz").modal('show');
+  }
+
+  
+
+
+function goToEditProgram(index) {
+    
+    
+	  $("#progId").val(listProgram[index].progId);
+	  $("#progName").val(listProgram[index].programName);
+	  $("#progDescription").val(listProgram[index].description);
+	  $("#progImg").val(listProgram[index].imagePath);
+	  
+	  $("#divEditProg").modal('show');
+  }
+
+    
+      function goToEditDragDropItems(index,gameId) {
+
+      if(gameId==1){
+          $("#itemId").val(""+listDragDropItems[index].itemId);
+          $("#itemName").val(listDragDropItems[index].name);
+          $("#itemPoint").val(listDragDropItems[index].point);
+          $("#itemImg").val(listDragDropItems[index].image);
+          $("#itemWeightPerUnit").val(0);
+          $("#divWeightUnit").hide();
+      }  else if (gameId==4){
+          $("#itemId").val(""+listSegregationItems[index].itemId);
+          $("#itemName").val(listSegregationItems[index].name);
+          $("#itemPoint").val(listSegregationItems[index].point);
+          $("#itemImg").val(listSegregationItems[index].image);
+          $("#itemWeightPerUnit").val(0);
+          $("#divWeightUnit").hide();
+      }   else if(gameId==2){
+          $("#itemId").val(""+listWeightCalulatorItems[index].itemId);
+          $("#itemName").val(listWeightCalulatorItems[index].name);
+          $("#itemPoint").val(listWeightCalulatorItems[index].point);
+          $("#itemImg").val(listWeightCalulatorItems[index].image);
+          $("#itemWeightPerUnit").val(""+listWeightCalulatorItems[index].plasticWeightPerUnit);
+          $("#divWeightUnit").show();
+      } else if(gameId==3){
+          $("#itemId").val(""+listFindObjectPlasticItems[index].itemId);
+          $("#itemName").val(listFindObjectPlasticItems[index].name);
+          $("#itemPoint").val(listFindObjectPlasticItems[index].point);
+          $("#itemImg").val(listFindObjectPlasticItems[index].image);
+          $("#itemWeightPerUnit").val(0);
+          $("#divWeightUnit").hide();
+      }
+
+         $("#divEditDragDropItem").modal('show');
+      }  
+
+      function getModuleByProgram(prog_id) {
+
+          $(document).ready(function() {
+              $.ajax({
+                  type: 'POST',
+                  url: '/admin/getModuleByProgram',
+                  data: {
+                      progId: prog_id
+                  },
+                  dataType: 'html',
+                  success: function(data) {
+
+                      $("#divTableData").html(data);
+                  },
+                  error: function (jqXHR) {
+                      $(document.body).text('Error: ' + jqXHR.status);
+                  }
+              });
+          });
+
+      }
+
+
+      function getItemsByGame(gameId) {
+	
+	  $(document).ready(function() {
+	      	$.ajax({
+	            type: 'POST',
+	            url: '/admin/getItemsByGame',
+	            data: {
+	            	gameId: gameId
+	            },
+	            dataType: 'html',
+	            success: function(data) {
+	            
+	                $("#divTableGameData").html(data);
+	            },
+	            error: function (jqXHR) {
+	                $(document.body).text('Error: ' + jqXHR.status);
+	            }
+	        });
+	    }); 
+	  
+  }
+  
+  </script>
+
+
+  <script th:inline="javascript">
+
+      var msg = /*[[${message}]]*/ '';
+
+      if(msg!=null){
+          $(document).ready(function(){
+              $("#exampleModal").modal('show');
+          });
+      }
+      function openImageInNewTab(url) {
+          window.open(url, "_blank");
+      }
+
+  </script>
+</body>
+
+</html>
+
